@@ -9,6 +9,7 @@ import {
   TouchableOpacity
 } from "react-native";
 import login_user from '../services/login'
+import deviceStorage from '../services/storage'
 
 // login function
 // here three things happen:
@@ -20,40 +21,50 @@ function Login(){
     var uname = ''
     var pword = ''
 
-    return (
+    if(deviceStorage.getItem('is_logged_in') != 'true'){
+      return (
+          <View style={styles.container}>
+          {/* <Image style={styles.image} source={require("./assets/log2.png")} /> */}
+
+          <StatusBar style="auto" />
+          <View style={styles.inputView}>
+          <TextInput
+              style={styles.TextInput}
+              placeholder="Username."
+              placeholderTextColor="#003f5c"
+              onChangeText={(username) => uname=username}
+          />
+          </View>
+
+          <View style={styles.inputView}>
+          <TextInput
+              style={styles.TextInput}
+              placeholder="Password."
+              placeholderTextColor="#003f5c"
+              secureTextEntry={true}
+              onChangeText={(password) => pword=password}
+          />
+          </View>
+
+          <TouchableOpacity>
+          <Text style={styles.forgot_button}>Forgot Password?</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity style={styles.loginBtn} onPress={() => login_user(uname, pword)}>
+          <Text style={styles.loginText}>LOGIN</Text>
+          </TouchableOpacity>
+          </View>
+      );
+    }
+    
+    else{
+      return(
         <View style={styles.container}>
-        {/* <Image style={styles.image} source={require("./assets/log2.png")} /> */}
-
-        <StatusBar style="auto" />
-        <View style={styles.inputView}>
-        <TextInput
-            style={styles.TextInput}
-            placeholder="Username."
-            placeholderTextColor="#003f5c"
-            onChangeText={(username) => uname=username}
-        />
+          <Text style={styles.forgot_button}>You are already logged in.</Text>
         </View>
-
-        <View style={styles.inputView}>
-        <TextInput
-            style={styles.TextInput}
-            placeholder="Password."
-            placeholderTextColor="#003f5c"
-            secureTextEntry={true}
-            onChangeText={(password) => pword=password}
-        />
-        </View>
-
-        <TouchableOpacity>
-        <Text style={styles.forgot_button}>Forgot Password?</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.loginBtn} onPress={() => login_user(uname, pword)}>
-        <Text style={styles.loginText}>LOGIN</Text>
-        </TouchableOpacity>
-        </View>
-    );
-}
+      )
+    };
+  };
 
 // this doesn't really matter it's just stuff
 // to make the screen look pretty

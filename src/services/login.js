@@ -1,20 +1,21 @@
 import axios from 'axios'
+import deviceStorage from './storage'
 
-const login_url = 'http://192.168.211.1:80/login/';
+// login service, does api request+storage
+const login_url = 'https://wineapp-api.herokuapp.com/login';
 
 export default async function login_user(uname, pword){
-    console.log("SHIT IS HAPPENING")
     // get request
-    fetch(login_url, {
-        method: "GET",
-        body: JSON.stringify({
+    // if handled properly, the storage lib in this 
+    axios.get(login_url, {
+        params: {
             username: uname,
             password: pword
-        })
+        }
     }).then((response) => {
         // handle jwt here
-        console.log(response.text())
-        console.log('aa')
+        deviceStorage.saveItem('is_logged_in', 'true')
+        deviceStorage.saveItem('token', response.data)
     }).catch((error) => {
         // handle errors here
         console.log(error)
