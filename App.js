@@ -1,14 +1,14 @@
 // main app, will use screens
 import React, {Component} from 'react'
-import Login from './src/screens/Login'
 
+// app starts off by doing init
 class App extends Component{
-  // create navigations and shit
+  // create navigations
   render(){
     return(
-      Login()
-    );
-  };
+      <Init/>
+    )
+  }
 };
 
 export default App;

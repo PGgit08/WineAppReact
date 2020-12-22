@@ -8,63 +8,88 @@ import {
   TextInput,
   TouchableOpacity
 } from "react-native";
-import login_user from '../services/login'
-import deviceStorage from '../services/storage'
+import axios from 'axios'
+import {goHome, goAuth} from '../navigation'
+
 
 // login function
 // here three things happen:
 // 1. gui for login
 // 2. server request for login
 // 3. storage things(like tokens)
-function Login(){
+class Login extends Component{
 
-    var uname = ''
-    var pword = ''
+  state = {
+    username: '',
+    password: ''
+  }
 
-    if(deviceStorage.getItem('is_logged_in') != 'true'){
-      return (
-          <View style={styles.container}>
-          {/* <Image style={styles.image} source={require("./assets/log2.png")} /> */}
+  onChangeText = (key, value) => {
+    this.setState({ [key]: value})
+  }
 
-          <StatusBar style="auto" />
-          <View style={styles.inputView}>
-          <TextInput
-              style={styles.TextInput}
-              placeholder="Username."
-              placeholderTextColor="#003f5c"
-              onChangeText={(username) => uname=username}
-          />
-          </View>
-
-          <View style={styles.inputView}>
-          <TextInput
-              style={styles.TextInput}
-              placeholder="Password."
-              placeholderTextColor="#003f5c"
-              secureTextEntry={true}
-              onChangeText={(password) => pword=password}
-          />
-          </View>
-
-          <TouchableOpacity>
-          <Text style={styles.forgot_button}>Forgot Password?</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity style={styles.loginBtn} onPress={() => login_user(uname, pword)}>
-          <Text style={styles.loginText}>LOGIN</Text>
-          </TouchableOpacity>
-          </View>
-      );
+  signIn = async () => {
+    const {username, password} = this.state;
+    const api_endpoint = 'https://wineapp-api.herokuapp.com/login'
+    // try doing log in
+    try{
+      axios.get(api_endpoint, {
+        params: {
+          username: username, 
+          password: password
+        }
+      }).then((response) => {
+        // async storage, set jwt
+        console.log(response)
+      }).catch((error) => {
+        console.log(error)
+        // retry
+      })
     }
-    
-    else{
-      return(
-        <View style={styles.container}>
-          <Text style={styles.forgot_button}>You are already logged in.</Text>
-        </View>
-      )
+
+    catch(error){
+      console.log('Login error: ' + error);
+      goAuth();
     };
+
   };
+
+  render(){
+    return (
+      <View style={styles.container}>
+      {/* <Image style={styles.image} source={require("./assets/log2.png")} /> */}
+
+      <StatusBar style="auto" />
+      <View style={styles.inputView}>
+      <TextInput
+          style={styles.TextInput}
+          placeholder="Username."
+          placeholderTextColor="#003f5c"
+          onChangeText={(u) => this.onChangeText(username, u)}
+      />
+      </View>
+
+      <View style={styles.inputView}>
+      <TextInput
+          style={styles.TextInput}
+          placeholder="Password."
+          placeholderTextColor="#003f5c"
+          secureTextEntry={true}
+          onChangeText={(p) => this.onChangeText(password, p)}
+      />
+      </View>
+
+      <TouchableOpacity>
+      <Text style={styles.forgot_button}>Forgot Password?</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity style={styles.loginBtn} onPress={this.signIn}>
+      <Text style={styles.loginText}>LOGIN</Text>
+      </TouchableOpacity>
+      </View>
+    );
+  };
+};
 
 // this doesn't really matter it's just stuff
 // to make the screen look pretty
