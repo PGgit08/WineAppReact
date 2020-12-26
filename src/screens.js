@@ -6,8 +6,8 @@ export function registerScreens() {
     // in the .default we enter params like jwt or username+email from apps state
     Navigation.registerComponent('Home', () => require('./screens/Map').default);
     Navigation.registerComponent('Initializing', (sc) => require('./screens/Init').default);
-    Navigation.registerComponent('SignIn', () => require('./screens/Login').default);
-    Navigation.registerComponent('SignUp', () => require('./screens/Register').default);
+    Navigation.registerComponent('Login', () => require('./screens/Login').default);
+    Navigation.registerComponent('Register', () => require('./screens/Register').default);
     Navigation.registerComponent('Profile', () => require('./screens/Profile').default);
     // other screens will be added later
 };

@@ -1,8 +1,19 @@
-import { registerRootComponent } from 'expo';
+// set up screens, set root as Init screen
+import {Navigation} from 'react-native-navigation';
+import {registerScreens} from './src/screens';
 
-import App from './App';
+// register screens
+registerScreens();
 
-// registerRootComponent calls AppRegistry.registerComponent('main', () => App);
-// It also ensures that whether you load the app in the Expo client or in a native build,
-// the environment is set up appropriately
-registerRootComponent(App);
+// set root to be Init
+Navigation.events().registerAppLaunchedListener(() => {
+    // the name of the root is the same name used in screens.js
+    Navigation.setRoot({
+        root: {
+            component: {
+                name: 'Initializing'
+            }
+        }
+    });
+});
+
