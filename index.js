@@ -3,6 +3,8 @@ import {Navigation} from 'react-native-navigation';
 import {registerScreens} from './src/screens';
 
 // register screens
+// navigation.registercomponents funcs here instead of usual react native
+// func
 registerScreens();
 
 // set root to be Init
