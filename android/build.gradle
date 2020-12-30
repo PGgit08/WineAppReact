@@ -1,29 +1,11 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
-    ext {
-        buildToolsVersion = "29.0.2"
-        minSdkVersion = 21
-        compileSdkVersion = 29
-        targetSdkVersion = 29
-        kotlinVersion = "1.3.72"
-
-        // RNN = react-native-navigation which uses kotlin
-        // using kotlin versuib 1.3.72
-        RNNKotlinVersion = kotlinVersion
-    }
     repositories {
-        google()
         jcenter()
-
-        // more things for RNN
-        mavenLocal()
-        mavenCentral()
     }
     dependencies {
-        // more things for RNN
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion")
-        classpath 'com.android.tools.build:gradle:3.5.3'
+        classpath 'com.android.tools.build:gradle:2.2.3'
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -32,19 +14,11 @@ buildscript {
 
 allprojects {
     repositories {
-        google()
         mavenLocal()
+        jcenter()
         maven {
             // All of React Native (JS, Obj-C sources, Android binaries) is installed from npm
-            url("$rootDir/../node_modules/react-native/android")
+            url "$rootDir/../node_modules/react-native/android"
         }
-        maven {
-            // Android JSC is installed from npm
-            url("$rootDir/../node_modules/jsc-android/dist")
-        }
-
-        google()
-        jcenter()
-        maven { url 'https://www.jitpack.io' }
     }
 }
