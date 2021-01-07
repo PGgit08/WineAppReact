@@ -8,9 +8,11 @@ import {
   TextInput,
   TouchableOpacity
 } from "react-native";
-import axios from 'axios'
-import {goHome, goAuth} from '../navigation'
+import axios from 'axios';
+import { Auth } from '../navigation';
+import { Navigation } from 'react-native-navigation'
 
+Navigation.events
 
 // login function
 // here three things happen:
@@ -49,7 +51,7 @@ class Login extends Component{
 
     catch(error){
       console.log('Login error: ' + error);
-      goAuth();
+      
     };
 
   };
