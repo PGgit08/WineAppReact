@@ -1,19 +1,21 @@
 // import stuff
-import React from 'react';
+import React, {Component} from 'react';
 import {registerRootComponent} from 'expo';
-import {Init} from './src/storage';
-// import Auth from './src/Auth';
+import {Init, SignOut} from './src/storage';
+import Auth from './src/Auth';
 // import Home from './src/Home';
 
 import {
     StyleSheet,
     Text,
-    View
+    View,
+    Button
 } from "react-native";
 
 // App class
-class App extends React.Component{
-    constructor(){
+class App extends Component{
+    constructor(props){
+        super(props);
         this.state = {
             jwt: "",
             checkedLogin: false,
@@ -25,20 +27,23 @@ class App extends React.Component{
     // gets called when components render
     // successfully
     componentDidMount(){
-        const token = Init();
-        if(token == null){
-            this.setState({
-                checkedLogin: true
-            });
-        };
+        // this promise is an asyncstorage promise(returned)
+        const token_promise = Init();
 
-        if(token != null){
-            this.setState({
-                jwt: token,
-                checkedLogin: true,
-                loggedIn: true
-            });
-        };
+        // check promise if it has loaded
+        // or gotten an error
+        token_promise.then(
+            (val) => {
+                if(val != null){
+                    this.setState({checkedLogin: true, loggedIn: true, jwt: val});
+                }
+                else{
+                    this.setState({checkedLogin: true});
+                };
+            }
+        ).catch(
+            (err) => {console.log(err)}
+        );
     };
 
     render(){
@@ -51,19 +56,22 @@ class App extends React.Component{
                     <Text style={styles.msg}>
                         Logged In
                     </Text>
+                    <Button title="Log Out" onPress={SignOut}>
+                
+                    </Button>
                 </View>
             );
         };
         if(!loggedIn){
             // return auth navigation
-            // <Auth/>
-            return(
-                <View style={styles.container}>
-                    <Text style={styles.msg}>
-                        Your Are Not Logged In
-                    </Text>
-                </View>
-            );
+            return <Auth/>
+            // return(
+            //     <View style={styles.container}>
+            //         <Text style={styles.msg}>
+            //             Your Are Not Logged In
+            //         </Text>
+            //     </View>
+            // );
         };
         
         if (!checkedLogin){

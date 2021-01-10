@@ -1,7 +1,7 @@
 import AsyncStorage from '@react-native-community/async-storage';
-import USER_KEY from './config';
+import {USER_KEY} from './config';
 
-export const SignUp = (jwt) => {
+export const SignIn = (jwt) => {
     AsyncStorage.setItem(USER_KEY, jwt);
 };
 
@@ -10,14 +10,10 @@ export const SignOut = () => {
 };
 
 export const Init = () => {
-    try{
-        const token = AsyncStorage.getItem(USER_KEY);
-        return token;
-    }
-    catch(err){
-        console.log(err);
-        return null;
-    }
+    // this is returned as a promise
+    // the func in app will deal
+    // with this promise
+    return AsyncStorage.getItem(USER_KEY);
 };
 
 
