@@ -11,8 +11,9 @@ import expo.modules.splashscreen.singletons.SplashScreen;
 import expo.modules.splashscreen.SplashScreenImageResizeMode;
 
 import com.reactnativenavigation.NavigationActivity;
+import com.facebook.react.ReactActivity;
 
-public class MainActivity extends NavigationActivity {
+public class MainActivity extends ReactActivity {
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
