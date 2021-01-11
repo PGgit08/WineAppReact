@@ -1,25 +1,29 @@
-import {Navigation} from 'react-native-navigation';
+// navigation for 
+// Home and Auth
+// flows
 
-// create two navigation funcs
-// goAuth, go to authentication screens
-// goHome, go to home screen
-// different types of navigations between screens used
+// screen imports
+import Login from './screens/Login';
+import Register from './screens/Register';
 
-export const goAuth = () => Navigation.setRoot({
-    root: {
-        stack: {
-            children: [
-                {
-                    component: {
-                        name: 'Login'
-                    }
-                },
-                {
-                    component: {
-                        name: 'Register'
-                    }
-                }
-            ]
-        }
-    }
-});
+// navigation imports
+import {createStackNavigator} from '@react-navigation/stack';
+import {NavigationContainer} from '@react-navigation/native';
+
+export const homeFlow;
+
+// authFlow, auth_server = dict containing api endpoints
+export const authFlow = (auth_server) => {
+    const Stack = createStackNavigator();
+    const auth_navigation = (
+        <NavigationContainer>
+            <Stack.Navigator>
+                <Stack.Screen name="Login" component={Login}/>
+                <Stack.Screen name="Register" component={Register}/>
+            </Stack.Navigator>
+        </NavigationContainer>
+    );
+
+    // return navigation
+    return auth_navigation;
+};

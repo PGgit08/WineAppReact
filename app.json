@@ -1,4 +1,38 @@
 {
-  "name": "Peter-First-App",
-  "displayName": "Peter-First-App"
+  "expo": {
+    "name": "Peter-First-App",
+    "slug": "Peter-First-App",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "entryPoint": "./index.js",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.peterthecoder.PeterFirstApp"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#FFFFFF"
+      },
+      "package": "com.peterthecoder.PeterFirstApp",
+      "config":{
+        "googleMaps": {"apiKey": "AIzaSyB6PXTbvuOSz2Yu720vek9AP_7R3YBJnKo"}
+      }
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    }
+  }
 }
