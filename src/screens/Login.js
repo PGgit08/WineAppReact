@@ -5,10 +5,12 @@ import {
   Text,
   View,
   TextInput,
-  TouchableOpacity
+  TouchableOpacity,
+  Button
 } from "react-native";
 import axios from 'axios';
 import {SignIn} from '../storage';
+
 
 class Login extends Component{
     constructor(props){
@@ -25,13 +27,12 @@ class Login extends Component{
 
     signInfunc = async () => {
         const {username, password} = this.state;
-        const api_endpoint = 'https://wineapp-api.herokuapp.com/login'
         // try doing log in
-        axios.get(api_endpoint, {
-        params: {
-            username: username, 
-            password: password
-        }
+        axios.get(AUTH_ENDPOINTS.login, {
+            params: {
+                username: username, 
+                password: password
+            }
         }).then(
             (res) => {SignIn(res.data)}
         ).catch(
@@ -43,6 +44,12 @@ class Login extends Component{
         return (
             <View style={styles.container}>
             <StatusBar style="auto" />
+            <View>
+                <Button 
+                title='Register'
+                onPress={this.props.navigation.navigate('Register')}
+                />
+            </View>
             <View style={styles.inputView}>
                 <TextInput
                     style={styles.TextInput}

@@ -1,3 +1,4 @@
+import { StatusBar } from "expo-status-bar";
 import React, {Component} from 'react';
 import {
   View,
@@ -7,8 +8,7 @@ import {
   TouchableOpacity
 } from 'react-native';
 import axios from 'axios';
-import {} from ''
-
+import {SignIn} from '../storage';
 
 class Register extends Component{
     constructor(props){
@@ -26,16 +26,29 @@ class Register extends Component{
 
     register(){
         const {username, password, email} = this.state;
-        axios.get(
-            
-        )
-
+        axios.get(AUTH_ENDPOINTS.register, {
+            params: {
+                username: username,
+                password: password,
+                email: email
+            }
+        }).then(
+            (res) => {SignIn(res.data)}
+        ).catch(
+            (err) => {console.log(err)}
+        );
     };
 
     render(){
         return (
             <View style={styles.container}>
                 <StatusBar style="auto" />
+                <View>
+                    <Button 
+                    title='Register'
+                    onPress={this.props.navigation.goBack()}
+                    />
+                </View>
                 <View style={styles.inputView}>
                     <TextInput
                         style={styles.TextInput}
