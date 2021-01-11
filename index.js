@@ -13,6 +13,7 @@ import {
 } from "react-native";
 
 // App class
+// hello
 class App extends Component{
     constructor(props){
         super(props);
