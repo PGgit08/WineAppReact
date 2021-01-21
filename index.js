@@ -27,6 +27,7 @@ class App extends Component{
     // react.component method
     // gets called when components render
     // successfully
+    
     componentDidMount(){
         // this promise is an asyncstorage promise(returned)
         const token_promise = Init();
@@ -51,17 +52,17 @@ class App extends Component{
         const {jwt, checkedLogin, loggedIn} = this.state;
         if(loggedIn){
             // return home navigation
-            // <Home/>
-            return(
-                <View style={styles.container}>
-                    <Text style={styles.msg}>
-                        Logged In
-                    </Text>
-                    <Button title="Log Out" onPress={SignOut}>
+            <Home/>
+            // return(
+            //     <View style={styles.container}>
+            //         <Text style={styles.msg}>
+            //             Logged In
+            //         </Text>
+            //         <Button title="Log Out" onPress={SignOut}>
                 
-                    </Button>
-                </View>
-            );
+            //         </Button>
+            //     </View>
+            // );
         };
         if(!loggedIn){
             // return auth navigation
