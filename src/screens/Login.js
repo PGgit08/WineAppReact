@@ -10,6 +10,7 @@ import {
 } from "react-native";
 import axios from 'axios';
 import {SignIn} from '../storage';
+import {useNavigation} from '@react-navigation/native';
 
 
 class Login extends Component{
@@ -28,7 +29,7 @@ class Login extends Component{
     signInfunc = async () => {
         const {username, password} = this.state;
         // try doing log in
-        axios.get(AUTH_ENDPOINTS.login, {
+        axios.get(this.props.api_endpoint, {
             params: {
                 username: username, 
                 password: password
@@ -41,13 +42,14 @@ class Login extends Component{
     };
 
     render(){
+        const { navigation } = this.props;
         return (
             <View style={styles.container}>
             <StatusBar style="auto" />
             <View>
                 <Button 
                 title='Register'
-                onPress={this.props.navigation.navigate('Register')}
+                onPress={navigation.navigate('Register')}
                 />
             </View>
             <View style={styles.inputView}>

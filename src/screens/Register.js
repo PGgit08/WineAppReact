@@ -5,10 +5,12 @@ import {
   Text,
   StyleSheet,
   TextInput,
-  TouchableOpacity
+  TouchableOpacity,
+  Button
 } from 'react-native';
 import axios from 'axios';
 import {SignIn} from '../storage';
+import {useNavigation} from '@react-navigation/native';
 
 class Register extends Component{
     constructor(props){
@@ -26,7 +28,7 @@ class Register extends Component{
 
     register(){
         const {username, password, email} = this.state;
-        axios.get(AUTH_ENDPOINTS.register, {
+        axios.get(this.props.api_endpoint, {
             params: {
                 username: username,
                 password: password,
@@ -40,13 +42,14 @@ class Register extends Component{
     };
 
     render(){
+        const { navigation } = this.props;
         return (
             <View style={styles.container}>
                 <StatusBar style="auto" />
                 <View>
                     <Button 
                     title='Register'
-                    onPress={this.props.navigation.goBack()}
+                    onPress={navigation.goBack()}
                     />
                 </View>
                 <View style={styles.inputView}>
