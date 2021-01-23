@@ -1,9 +1,9 @@
 // import stuff
 import React, {Component} from 'react';
 import {registerRootComponent} from 'expo';
-import {Init, SignOut} from './src/storage';
+import {Init} from './src/storage';
 import Auth from './src/Auth';
-// import Home from './src/Home';
+import Home from './src/Home';
 
 import {
     StyleSheet,
@@ -24,11 +24,10 @@ class App extends Component{
         };
     };
 
-    // react.component method
-    // gets called when components render
-    // successfully
-    
-    componentDidMount(){
+    // init function
+    // checks if person logged in or not
+    init = () => {
+        // lol
         // this promise is an asyncstorage promise(returned)
         const token_promise = Init();
 
@@ -40,7 +39,7 @@ class App extends Component{
                     this.setState({checkedLogin: true, loggedIn: true, jwt: val});
                 }
                 else{
-                    this.setState({checkedLogin: true});
+                    this.setState({checkedLogin: true, loggedIn: false, jwt:""});
                 };
             }
         ).catch(
@@ -48,25 +47,29 @@ class App extends Component{
         );
     };
 
+    // react.component method
+    // gets called when components render
+    // successfully
+    
+    componentDidMount(){
+        // call Init func
+        this.init();
+    };
+
+    change_state = (key, val) => {
+        this.setState({[key]: val});
+    };
+
     render(){
         const {jwt, checkedLogin, loggedIn} = this.state;
         if(loggedIn){
             // return home navigation
-            <Home/>
-            // return(
-            //     <View style={styles.container}>
-            //         <Text style={styles.msg}>
-            //             Logged In
-            //         </Text>
-            //         <Button title="Log Out" onPress={SignOut}>
-                
-            //         </Button>
-            //     </View>
-            // );
+            return <Home rload={this.init} jwt={this.state.jwt}/>
+
         };
         if(!loggedIn){
             // return auth navigation
-            return <Auth/>
+            return <Auth change_jwt={this.change_state} rload={this.init}/>
             // return(
             //     <View style={styles.container}>
             //         <Text style={styles.msg}>

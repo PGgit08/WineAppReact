@@ -10,8 +10,6 @@ import {
 } from "react-native";
 import axios from 'axios';
 import {SignIn} from '../storage';
-import {useNavigation} from '@react-navigation/native';
-
 
 class Login extends Component{
     constructor(props){
@@ -35,23 +33,26 @@ class Login extends Component{
                 password: password
             }
         }).then(
-            (res) => {SignIn(res.data)}
+            (res) => {
+                SignIn(res.data);
+                this.props.change_jwt('jwt', res.data);
+                this.props.rload();
+            }
         ).catch(
             (err) => {console.log(err)}
         );
     };
 
     render(){
-        const { navigation } = this.props;
         return (
             <View style={styles.container}>
             <StatusBar style="auto" />
-            <View>
+            {/* <View>
                 <Button 
                 title='Register'
                 onPress={navigation.navigate('Register')}
                 />
-            </View>
+            </View> */}
             <View style={styles.inputView}>
                 <TextInput
                     style={styles.TextInput}
