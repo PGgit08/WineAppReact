@@ -4,6 +4,7 @@
     "slug": "Peter-First-App",
     "version": "1.0.0",
     "orientation": "portrait",
+    "platforms": ["web"],
     "icon": "./assets/icon.png",
     "entryPoint": "./index.js",
     "splash": {
@@ -28,7 +29,7 @@
       },
       "package": "com.peterthecoder.PeterFirstApp",
       "config":{
-        "googleMaps": {"apiKey": "AIzaSyB6PXTbvuOSz2Yu720vek9AP_7R3YBJnKo"}
+        "googleMaps": {"apiKey": "AIzaSyAEjiYB-QJ1eo4ErhE93rvAFTVI1xu24ng"}
       }
     },
     "web": {

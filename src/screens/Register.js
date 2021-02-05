@@ -48,7 +48,7 @@ class Register extends Component{
                 <StatusBar style="auto" />
                 <View>
                     <Button 
-                    title='Register'
+                    title='Login'
                     onPress={navigation.goBack()}
                     />
                 </View>
@@ -131,4 +131,14 @@ const styles = StyleSheet.create({
     }
 });
 
-export default Register
+function register({navigation, route}){
+    const {change_jwt, rload, api_endpoint} = route.params;
+
+    return (<Register navigation={navigation} 
+            change_jwt={change_jwt} 
+            rload={rload} 
+            api_endpoint={api_endpoint}
+        />);
+};
+
+export default register;

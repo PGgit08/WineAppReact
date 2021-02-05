@@ -6,12 +6,13 @@
 import React from 'react';
 
 // screen imports auth
-import Login from './screens/Login';
-import Register from './screens/Register';
+import login from './screens/Login';
+import register from './screens/Register';
 
 // screen imports home
 import Map from './screens/Map';
 import Profile from './screens/Profile';
+
 
 // navigation imports
 import {createStackNavigator} from '@react-navigation/stack';
@@ -27,19 +28,29 @@ export const homeFlow = (state) => {
 
 // authFlow, auth_server = dict containing api endpoints
 export const authFlow = (change_jwt, rload) => {
-    const login_endpoint = AUTH_ENDPOINTS.login;
-
     const Stack = createStackNavigator();
     const auth_navigation = (
         <NavigationContainer>
-            <Stack.Navigator>
+            <Stack.Navigator initialRouteName="Login">
                 {/* Screens for login and register */}
-                <Stack.Screen name="Login" component={Login}/>
-                <Stack.Screen name="Register" component={Register}/>
+                <Stack.Screen
+                    name="Login" 
+                    component={login} 
+                    initialParams={{change_jwt: change_jwt, 
+                                    rload: rload,
+                                    api_endpoint: AUTH_ENDPOINTS.login}}
+                />            
+                <Stack.Screen
+                    name="Register"
+                    component={register}
+                    initialParams={{change_jwt: change_jwt,
+                                    rload: rload,
+                                    api_endpoint: AUTH_ENDPOINTS.register}}
+                />
             </Stack.Navigator>
         </NavigationContainer>
     );
 
     // return navigation
-    return <Login change_jwt={change_jwt} rload={rload} api_endpoint={login_endpoint}/>;
+    return auth_navigation;
 };

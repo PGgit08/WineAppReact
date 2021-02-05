@@ -9,7 +9,8 @@ import {
     StyleSheet,
     Text,
     View,
-    Button
+    AppRegistry,
+    Platform
 } from "react-native";
 
 // App class
@@ -106,3 +107,14 @@ const styles = StyleSheet.create({
 // expo uses this registry method instead of registry component
 // when app launches maybe registry component will work
 registerRootComponent(App);
+
+// for web
+// AppRegistry.registerComponent("Peter-First-App", () => App);
+
+
+// if (Platform.OS == "web"){
+//     AppRegistry.runApplication("Peter-First-App", {
+//         rootTag: document.getElementById('root')
+//     });
+// };
+

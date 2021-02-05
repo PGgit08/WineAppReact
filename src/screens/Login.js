@@ -47,12 +47,12 @@ class Login extends Component{
         return (
             <View style={styles.container}>
             <StatusBar style="auto" />
-            {/* <View>
+            <View>
                 <Button 
                 title='Register'
-                onPress={navigation.navigate('Register')}
+                onPress={this.props.navigation.navigate('Register')}
                 />
-            </View> */}
+            </View>
             <View style={styles.inputView}>
                 <TextInput
                     style={styles.TextInput}
@@ -126,6 +126,18 @@ const styles = StyleSheet.create({
         backgroundColor: "#FF1493"
     }
 });
+//b
 
-// export class
-export default Login;
+// export class as func for navigation
+function login({navigation, route}){
+    const {change_jwt, rload, api_endpoint} = route.params;
+
+    return (<Login navigation={navigation} 
+                change_jwt={change_jwt} 
+                rload={rload} 
+                api_endpoint={api_endpoint}
+            />);
+};
+
+export default login;
+

@@ -1,9 +1,9 @@
 // async storage token
 export const USER_KEY = 'token';
 
-const base = 'https://wineapp-api.herokuapp.com'
+const auth_base = 'https://wineapp-api.herokuapp.com/users';
 
 export const AUTH_ENDPOINTS = {
-    register: base + '/register',
-    login: base + '/login'
+    register: auth_base + '/register',
+    login: auth_base + '/login'
 }
