@@ -106,15 +106,15 @@ const styles = StyleSheet.create({
 
 // expo uses this registry method instead of registry component
 // when app launches maybe registry component will work
-registerRootComponent(App);
+// registerRootComponent(App);
 
 // for web
-// AppRegistry.registerComponent("Peter-First-App", () => App);
+AppRegistry.registerComponent("Peter-First-App", () => App);
 
 
-// if (Platform.OS == "web"){
-//     AppRegistry.runApplication("Peter-First-App", {
-//         rootTag: document.getElementById('root')
-//     });
-// };
+if (Platform.OS == "web"){
+    AppRegistry.runApplication("Peter-First-App", {
+        rootTag: document.getElementById('root')
+    });
+};
 

@@ -42,14 +42,14 @@ class Register extends Component{
     };
 
     render(){
-        const { navigation } = this.props;
+        // const { navigation } = this.props;
         return (
             <View style={styles.container}>
                 <StatusBar style="auto" />
                 <View>
                     <Button 
                     title='Login'
-                    onPress={navigation.goBack()}
+                    onPress={this.props.navigation.goBack()}
                     />
                 </View>
                 <View style={styles.inputView}>
@@ -135,7 +135,6 @@ function register({navigation, route}){
     const {change_jwt, rload, api_endpoint} = route.params;
 
     return (<Register navigation={navigation} 
-            change_jwt={change_jwt} 
             rload={rload} 
             api_endpoint={api_endpoint}
         />);

@@ -36,15 +36,14 @@ export const authFlow = (change_jwt, rload) => {
                 <Stack.Screen
                     name="Login" 
                     component={login} 
-                    initialParams={{change_jwt: change_jwt, 
+                    initialParams={{change_jwt: change_jwt,
                                     rload: rload,
                                     api_endpoint: AUTH_ENDPOINTS.login}}
                 />            
                 <Stack.Screen
                     name="Register"
                     component={register}
-                    initialParams={{change_jwt: change_jwt,
-                                    rload: rload,
+                    initialParams={{rload: rload,
                                     api_endpoint: AUTH_ENDPOINTS.register}}
                 />
             </Stack.Navigator>
