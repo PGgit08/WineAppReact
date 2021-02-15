@@ -24,7 +24,7 @@ class Login extends Component{
         this.setState({[key]: value});
     };
 
-    signInfunc = async () => {
+    signIn = async () => {
         const {username, password} = this.state;
         // try doing log in
         axios.get(this.props.api_endpoint, {
@@ -35,8 +35,7 @@ class Login extends Component{
         }).then(
             (res) => {
                 SignIn(res.data);
-                this.props.change_jwt('jwt', res.data);
-                this.props.rload();
+                // change flow here later
             }
         ).catch(
             (err) => {console.log(err)}
@@ -76,7 +75,7 @@ class Login extends Component{
                 <Text style={styles.forgot_button}>Forgot Password?</Text>
             </TouchableOpacity>
         
-            <TouchableOpacity style={styles.loginBtn} onPress={this.signInfunc}>
+            <TouchableOpacity style={styles.loginBtn} onPress={this.signIn}>
                 <Text style={styles.loginBtn}>LOGIN</Text>
             </TouchableOpacity>
         </View>
@@ -130,11 +129,9 @@ const styles = StyleSheet.create({
 
 // export class as func for navigation
 function login({navigation, route}){
-    const {change_jwt, rload, api_endpoint} = route.params;
+    const {api_endpoint} = route.params;
 
-    return (<Login navigation={navigation} 
-                change_jwt={change_jwt} 
-                rload={rload} 
+    return (<Login navigation={navigation}  
                 api_endpoint={api_endpoint}
             />);
 };

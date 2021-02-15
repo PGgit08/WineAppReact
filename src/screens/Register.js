@@ -10,7 +10,6 @@ import {
 } from 'react-native';
 import axios from 'axios';
 import {SignIn} from '../storage';
-import {useNavigation} from '@react-navigation/native';
 
 class Register extends Component{
     constructor(props){
@@ -20,13 +19,14 @@ class Register extends Component{
             password: '',
             email: ''
         };
+        
     };
 
     onChangeText = (key, value) => {
         this.setState({[key]: value});
     };
 
-    register(){
+    register = async () => {
         const {username, password, email} = this.state;
         axios.get(this.props.api_endpoint, {
             params: {
@@ -132,10 +132,9 @@ const styles = StyleSheet.create({
 });
 
 function register({navigation, route}){
-    const {change_jwt, rload, api_endpoint} = route.params;
+    const {api_endpoint} = route.params;
 
     return (<Register navigation={navigation} 
-            rload={rload} 
             api_endpoint={api_endpoint}
         />);
 };

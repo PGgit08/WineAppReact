@@ -1,9 +1,8 @@
 // import stuff
 import React, {Component} from 'react';
-import {registerRootComponent} from 'expo';
+// import {registerRootComponent} from 'expo';
 import {Init} from './src/storage';
-import Auth from './src/Auth';
-import Home from './src/Home';
+import {goHome, goAuth} from './src/flows/flow_navigation';
 
 import {
     StyleSheet,
@@ -19,9 +18,8 @@ class App extends Component{
     constructor(props){
         super(props);
         this.state = {
-            jwt: "",
-            checkedLogin: false,
-            loggedIn: false
+            jwt: null,
+            checkedLogin: false
         };
     };
 
@@ -37,10 +35,10 @@ class App extends Component{
         token_promise.then(
             (val) => {
                 if(val != null){
-                    this.setState({checkedLogin: true, loggedIn: true, jwt: val});
+                    this.setState({checkedLogin: true, jwt: val});
                 }
                 else{
-                    this.setState({checkedLogin: true, loggedIn: false, jwt:""});
+                    this.setState({checkedLogin: true, jwt: null});
                 };
             }
         ).catch(
@@ -57,38 +55,27 @@ class App extends Component{
         this.init();
     };
 
-    change_state = (key, val) => {
-        this.setState({[key]: val});
-    };
-
     render(){
-        const {jwt, checkedLogin, loggedIn} = this.state;
-        if(loggedIn){
-            // return home navigation
-            return <Home rload={this.init} jwt={this.state.jwt}/>
+        // render home or auth flows based on state
+        const {checkedLogin, jwt} = this.state;
+        if(!checkedLogin){
+            return (
+            <View>
+                <Text>
+                    Some sort of app error, well that sucks.
+                    HAVE FUN!!!!!!!
+                </Text>
+            </View>);
+        };
 
+        if(!jwt){
+            // if no jwt was found, Authenticate
+            return goAuth();
         };
-        if(!loggedIn){
-            // return auth navigation
-            return <Auth change_jwt={this.change_state} rload={this.init}/>
-            // return(
-            //     <View style={styles.container}>
-            //         <Text style={styles.msg}>
-            //             Your Are Not Logged In
-            //         </Text>
-            //     </View>
-            // );
-        };
-        
-        if (!checkedLogin){
-            // return if the person is not logged in
-            return(
-                <View style={styles.container}>
-                    <Text style={styles.msg}>
-                        Login Not Checked
-                    </Text>
-                </View>
-            );
+
+        if(jwt){
+            // if jwt was found, go Home
+            return goHome();
         };
     };
 };
