@@ -1,9 +1,18 @@
-// import stuff
-import React, {Component} from 'react';
-// import {registerRootComponent} from 'expo';
-import {Init} from './src/storage';
-import {goHome, goAuth} from './src/flows/flow_navigation';
+// imports
+// react as usual
+import React, { Component } from 'react';
 
+// storage imports
+import { Init } from './src/storage';
+
+// navigation imports
+import { NavigationContainer } from '@react-navigation/native';
+import { homeFlow, authFlow } from './src/navigation/navigations';
+
+// context imports
+import { AuthContext, AuthProvider } from './src/contexts/auth_context';
+
+// gui just for tests
 import {
     StyleSheet,
     Text,
@@ -12,21 +21,16 @@ import {
     Platform
 } from "react-native";
 
+
 // App class
-// hello
 class App extends Component{
     constructor(props){
         super(props);
-        this.state = {
-            jwt: null,
-            checkedLogin: false
-        };
     };
 
     // init function
     // checks if person logged in or not
     init = () => {
-        // lol
         // this promise is an asyncstorage promise(returned)
         const token_promise = Init();
 
@@ -35,10 +39,10 @@ class App extends Component{
         token_promise.then(
             (val) => {
                 if(val != null){
-                    this.setState({checkedLogin: true, jwt: val});
+                    return val;
                 }
                 else{
-                    this.setState({checkedLogin: true, jwt: null});
+                    return null;
                 };
             }
         ).catch(
@@ -46,37 +50,24 @@ class App extends Component{
         );
     };
 
-    // react.component method
-    // gets called when components render
-    // successfully
-    
-    componentDidMount(){
-        // call Init func
-        this.init();
-    };
-
+    // rendering
     render(){
-        // render home or auth flows based on state
-        const {checkedLogin, jwt} = this.state;
-        if(!checkedLogin){
-            return (
-            <View>
-                <Text>
-                    Some sort of app error, well that sucks.
-                    HAVE FUN!!!!!!!
-                </Text>
-            </View>);
-        };
+        // load the context state and changer(basically Context.Consumer)
+        const auth_context = React.useContext(AuthContext);
+        
+        // change context's state to what init
+        // function returns
+        auth_context.state_change(this.init());
+        
+        // then load the context's state
+        const {jwt} = auth_context.state.jwt;
 
-        if(!jwt){
-            // if no jwt was found, Authenticate
-            return goAuth();
-        };
-
-        if(jwt){
-            // if jwt was found, go Home
-            return goHome();
-        };
+        // return container
+        return(
+            <NavigationContainer>
+            {/* check here whether jwt exists or not */}
+            </NavigationContainer>
+        );
     };
 };
 
@@ -91,12 +82,22 @@ const styles = StyleSheet.create({
     }
 });
 
+// full function for loading everything
+function Full_App(){
+    return (
+        <AuthProvider>
+            <App />
+        </AuthProvider>
+    );
+};
+
+
 // expo uses this registry method instead of registry component
 // when app launches maybe registry component will work
 // registerRootComponent(App);
 
 // for web
-AppRegistry.registerComponent("Peter-First-App", () => App);
+AppRegistry.registerComponent("Peter-First-App", () => Full_App);
 
 
 if (Platform.OS == "web"){

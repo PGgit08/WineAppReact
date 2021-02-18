@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import {SignOut} from '../storage';
 
 import {
@@ -11,21 +11,28 @@ import {
 class Profile extends Component{
     constructor(props){
         super(props);
+
+        this.state = {
+            log_out: false
+        };
     };
 
-    signOutfunc = async () => {
+    signOut = async () => {
         SignOut();
-        console.log(this.props.rload);
-        this.props.rload();
+        this.setState({log_out: true});
     };
 
     render(){
+        if(this.state.log_out){
+            return goAuth();
+        };
+
         return(
             <View style={styles.container}>
                 <Text style={styles.msg}>
                     Logged In
                 </Text>
-                <Button title="Log Out" onPress={this.signOutfunc}/>
+                <Button title="Log Out" onPress={this.signOut}/>
             </View>
         );
     };

@@ -18,7 +18,7 @@ class Login extends Component{
             username: '',
             password: ''
         };
-    }
+    };
 
     onChangeText = (key, value) => {
         this.setState({[key]: value});
@@ -35,7 +35,7 @@ class Login extends Component{
         }).then(
             (res) => {
                 SignIn(res.data);
-                // change flow here later
+                this.setState({log_in: true});
             }
         ).catch(
             (err) => {console.log(err)}
@@ -43,6 +43,10 @@ class Login extends Component{
     };
 
     render(){
+        if(this.state.log_in){
+            return goHome();
+        };
+
         return (
             <View style={styles.container}>
             <StatusBar style="auto" />
