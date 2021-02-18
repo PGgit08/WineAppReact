@@ -9,11 +9,11 @@ export const SignOut = () => {
     AsyncStorage.removeItem(USER_KEY);
 };
 
-export const Init = () => {
+export const Init = async () => {
     // this is returned as a promise
     // the func in app will deal
     // with this promise
-    return AsyncStorage.getItem(USER_KEY);
+    return await AsyncStorage.getItem(USER_KEY);
 };
 
 

@@ -1,13 +1,13 @@
 // imports
 // react as usual
-import React, { Component } from 'react';
+import React, { useEffect } from 'react';
 
 // storage imports
 import { Init } from './src/storage';
 
 // navigation imports
 import { NavigationContainer } from '@react-navigation/native';
-import { homeFlow, authFlow } from './src/navigation/navigations';
+import { HomeFlow, AuthFlow } from './src/navigation/navigations';
 
 // context imports
 import { AuthContext, AuthProvider } from './src/contexts/auth_context';
@@ -22,53 +22,46 @@ import {
 } from "react-native";
 
 
-// App class
-class App extends Component{
-    constructor(props){
-        super(props);
-    };
+// App function
+function App(){
 
-    // init function
-    // checks if person logged in or not
-    init = () => {
-        // this promise is an asyncstorage promise(returned)
-        const token_promise = Init();
-
-        // check promise if it has loaded
-        // or gotten an error
-        token_promise.then(
-            (val) => {
-                if(val != null){
-                    return val;
-                }
-                else{
-                    return null;
-                };
-            }
-        ).catch(
-            (err) => {console.log(err)}
-        );
-    };
-
-    // rendering
-    render(){
-        // load the context state and changer(basically Context.Consumer)
-        const auth_context = React.useContext(AuthContext);
-        
+    // load the context state and changer(basically Context.Consumer)
+    const auth_context = React.useContext(AuthContext);
+    
+    // only do this once app is done rendering
+    useEffect(() => {
         // change context's state to what init
         // function returns
-        auth_context.state_change(this.init());
-        
-        // then load the context's state
-        const {jwt} = auth_context.state.jwt;
-
-        // return container
-        return(
-            <NavigationContainer>
-            {/* check here whether jwt exists or not */}
-            </NavigationContainer>
+        // this is all async so that 
+        // the later code can be compiled
+        Init().then(
+            (val) => {
+                auth_context.change_context({jwt: val});
+            }
+        ).catch(
+            (err) => {
+                console.log(err);
+            }
         );
-    };
+    });
+    
+    // then load the context's state
+    const jwt = auth_context.context.jwt;
+
+    // return container, checking whether jwt exists or not
+    return(
+        <NavigationContainer>
+            {jwt == null ? (
+                <>
+                    <AuthFlow/>
+                </>
+            ) : (
+                <>
+                    <HomeFlow/>
+                </>
+            )};
+        </NavigationContainer>
+    );
 };
 
 const styles = StyleSheet.create({

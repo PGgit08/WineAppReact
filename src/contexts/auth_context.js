@@ -1,4 +1,4 @@
-import {createContext, useState} from 'react';
+import React, {createContext, useState} from 'react';
 
 // initial provider state
 var initialState = {
@@ -6,7 +6,7 @@ var initialState = {
 };
 
 // create the context
-export const AuthContext = createContext();
+export const AuthContext = createContext(initialState);
 
 // create the provider
 export const AuthProvider = ({children}) => {
@@ -16,8 +16,8 @@ export const AuthProvider = ({children}) => {
     // return provider with values
     return(
         <AuthContext.Provider value={{
-            state: state, 
-            state_change: setState
+            context: state, 
+            change_context: setState
         }}>
             {children}
         </AuthContext.Provider>

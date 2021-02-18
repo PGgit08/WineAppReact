@@ -6,8 +6,8 @@
 import React from 'react';
 
 // screen imports auth
-import login from '../screens/Login';
-import register from '../screens/Register';
+import Login from '../screens/Login';
+import Register from '../screens/Register';
 
 // screen imports home
 import Map from '../screens/Map';
@@ -21,26 +21,24 @@ import {NavigationContainer} from '@react-navigation/native';
 // get api endpoints
 import {AUTH_ENDPOINTS} from '../config';
 
-export const homeFlow = (state) => {
+export const HomeFlow = (state) => {
     // navigation stacks later here
     return <Profile token={state.jwt}/>;
 };
 
 // authFlow stack
-export const authFlow = () => {
+export const AuthFlow = () => {
     const Stack = createStackNavigator();
     const auth_navigation = (
         <Stack.Navigator initialRouteName="Login">
             {/* Screens for login and register */}
             <Stack.Screen
                 name="Login" 
-                component={login} 
-                initialParams={{api_endpoint: AUTH_ENDPOINTS.login}}
+                component={Login} 
             />            
             <Stack.Screen
                 name="Register"
-                component={register}
-                initialParams={{api_endpoint: AUTH_ENDPOINTS.register}}
+                component={Register}
             />
         </Stack.Navigator>
     );

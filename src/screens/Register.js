@@ -1,92 +1,94 @@
 import { StatusBar } from "expo-status-bar";
-import React, {Component} from 'react';
+import React, { useState } from "react";
 import {
-  View,
-  Text,
   StyleSheet,
+  Text,
+  View,
   TextInput,
   TouchableOpacity,
   Button
-} from 'react-native';
+} from "react-native";
+
+// api request lib
 import axios from 'axios';
+
+// storage
 import {SignIn} from '../storage';
 
-class Register extends Component{
-    constructor(props){
-        super(props);
-        this.state = {
-            username: '',
-            password: '',
-            email: ''
-        };
-        
-    };
+// context
+import {AuthContext} from '../contexts/auth_context';
 
-    onChangeText = (key, value) => {
-        this.setState({[key]: value});
-    };
+// config urls
+import {AUTH_ENDPOINTS} from '../config';
 
-    register = async () => {
-        const {username, password, email} = this.state;
-        axios.get(this.props.api_endpoint, {
-            params: {
-                username: username,
-                password: password,
-                email: email
-            }
-        }).then(
-            (res) => {SignIn(res.data)}
-        ).catch(
-            (err) => {console.log(err)}
-        );
-    };
+// sign in function
+const signIn = async (username, password, email) => {
+    // try doing log in
+    axios.get(AUTH_ENDPOINTS.register, {
+        params: {
+            username: username, 
+            password: password,
+            email: email
+        }
+    }).then(
+        (res) => {
+            // storage sign in
+            SignIn(res.data);
 
-    render(){
-        // const { navigation } = this.props;
-        return (
-            <View style={styles.container}>
-                <StatusBar style="auto" />
-                <View>
-                    <Button 
-                    title='Login'
-                    onPress={this.props.navigation.goBack()}
-                    />
-                </View>
-                <View style={styles.inputView}>
-                    <TextInput
-                        style={styles.TextInput}
-                        placeholder="Username."
-                        placeholderTextColor="#003f5c"
-                        onChangeText={(u) => this.onChangeText('username', u)}
-                    />
-                </View>
-            
-                <View style={styles.inputView}>
-                    <TextInput
-                        style={styles.TextInput}
-                        placeholder="Password."
-                        placeholderTextColor="#003f5c"
-                        secureTextEntry={true}
-                        onChangeText={(p) => this.onChangeText('password', p)}
-                    />
-                </View>
-
-                <View>
-                    <TextInput
-                        style={styles.TextInput}
-                        placeholder="Email."
-                        placeholderTextColor="#003f5c"
-                        onChangeText={(e) => this.onChangeText('email', e)}
-                    />
-                </View>
-            
-                <TouchableOpacity style={styles.loginBtn} onPress={this.register}>
-                    <Text style={styles.registerBtn}>REGISTER</Text>
-                </TouchableOpacity>
-            </View>
-        );
-      };
+            // context save jwt
+            React.useContext(AuthContext).change_context({jwt: res.data});
+        }
+    ).catch(
+        (err) => {console.log(err)}
+    );
 };
+
+function Register({ navigation }){
+    // create function state
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    const [email, setEmail] = useState('');
+
+    // return jsx
+    return (
+        <View style={styles.container}>
+        <StatusBar style="auto" />
+
+        <View style={styles.inputView}>
+            <TextInput
+                style={styles.TextInput}
+                placeholder="Username."
+                placeholderTextColor="#003f5c"
+                onChangeText={(u) => setUsername(u)}
+            />
+        </View>
+    
+        <View style={styles.inputView}>
+            <TextInput
+                style={styles.TextInput}
+                placeholder="Password."
+                placeholderTextColor="#003f5c"
+                secureTextEntry={true}
+                onChangeText={(p) => setPassword(p)}
+            />
+        </View>
+
+        <View style={styles.inputView}>
+            <TextInput
+                style={styles.TextInput}
+                placeholder="Email."
+                placeholderTextColor="#003f5c"
+                secureTextEntry={true}
+                onChangeText={(e) => setEmail(e)}
+            />
+        </View>
+        
+        <TouchableOpacity style={styles.loginBtn} onPress={() => signIn(username, password, email)}>
+            <Text style={styles.loginBtn}>REGISTER</Text>
+        </TouchableOpacity>
+    </View>
+    );
+}
 
 // this doesn't really matter it's just stuff
 // to make the screen look pretty
@@ -120,7 +122,7 @@ const styles = StyleSheet.create({
         marginBottom: 30
     },
 
-    registerBtn: {
+    loginBtn: {
         width: "80%",
         borderRadius: 25,
         height: 50,
@@ -131,12 +133,6 @@ const styles = StyleSheet.create({
     }
 });
 
-function register({navigation, route}){
-    const {api_endpoint} = route.params;
+// export function
+export default Register;
 
-    return (<Register navigation={navigation} 
-            api_endpoint={api_endpoint}
-        />);
-};
-
-export default register;
