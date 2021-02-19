@@ -22,7 +22,7 @@ import {AuthContext} from '../contexts/auth_context';
 import {AUTH_ENDPOINTS} from '../config';
 
 // sign in function
-const signIn = async (username, password, email) => {
+const signIn = (username, password, email) => {
     // try doing log in
     axios.get(AUTH_ENDPOINTS.register, {
         params: {

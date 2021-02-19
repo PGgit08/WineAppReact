@@ -1,12 +1,12 @@
 import AsyncStorage from '@react-native-community/async-storage';
 import {USER_KEY} from './config';
 
-export const SignIn = (jwt) => {
-    AsyncStorage.setItem(USER_KEY, jwt);
+export const SignIn = async (jwt) => {
+    await AsyncStorage.setItem(USER_KEY, jwt);
 };
 
-export const SignOut = () => {
-    AsyncStorage.removeItem(USER_KEY);
+export const SignOut = async () => {
+    await AsyncStorage.removeItem(USER_KEY);
 };
 
 export const Init = async () => {

@@ -2,24 +2,31 @@ import React, {createContext, useState} from 'react';
 
 // initial provider state
 var initialState = {
-    jwt: null
+    jwt: null,
+    store_id: null
 };
 
 // create the context
-export const AuthContext = createContext(initialState);
+const AuthContext = createContext(initialState);
 
 // create the provider
-export const AuthProvider = ({children}) => {
+const AuthProvider = ({children}) => {
     // provider state part
     const [state, setState] = useState(initialState);
  
     // return provider with values
     return(
         <AuthContext.Provider value={{
-            context: state, 
-            change_context: setState
-        }}>
+                context: state, 
+                change: setState
+            }}>
             {children}
         </AuthContext.Provider>
     )
 };
+
+// export 
+export {
+    AuthContext,
+    AuthProvider
+}

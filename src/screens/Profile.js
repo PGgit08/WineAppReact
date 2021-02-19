@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useContext } from 'react';
 import {SignOut} from '../storage';
 
 import {
@@ -8,34 +8,22 @@ import {
     StyleSheet
 } from 'react-native';
 
-class Profile extends Component{
-    constructor(props){
-        super(props);
+import {AuthContext} from '../contexts/main_context';
 
-        this.state = {
-            log_out: false
-        };
-    };
+const signOut = () => {
+    SignOut();
+    useContext(AuthContext).change_context({jwt: null});
+};
 
-    signOut = async () => {
-        SignOut();
-        this.setState({log_out: true});
-    };
-
-    render(){
-        if(this.state.log_out){
-            return goAuth();
-        };
-
-        return(
-            <View style={styles.container}>
-                <Text style={styles.msg}>
-                    Logged In
-                </Text>
-                <Button title="Log Out" onPress={this.signOut}/>
-            </View>
-        );
-    };
+function Profile(){
+    return(
+        <View style={styles.container}>
+            <Text style={styles.msg}>
+                Logged In
+            </Text>
+            <Button title="Log Out" onPress={signOut}/>
+        </View>
+    );
 };
 
 const styles = StyleSheet.create({

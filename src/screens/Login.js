@@ -22,7 +22,7 @@ import {AuthContext} from '../contexts/auth_context';
 import {AUTH_ENDPOINTS} from '../config';
 
 // sign in function
-const signIn = async (username, password) => {
+const signIn = (username, password) => {
     // try doing log in
     axios.get(AUTH_ENDPOINTS.login, {
         params: {
@@ -33,9 +33,6 @@ const signIn = async (username, password) => {
         (res) => {
             // storage sign in
             SignIn(res.data);
-
-            // context save jwt
-            React.useContext(AuthContext).change_context({jwt: res.data});
         }
     ).catch(
         (err) => {console.log(err)}
@@ -47,6 +44,7 @@ function Login({ navigation }){
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
+    const auth_context = React.useContext(AuthContext)
     // return jsx
     return (
         <View style={styles.container}>
@@ -80,7 +78,7 @@ function Login({ navigation }){
             <Text style={styles.forgot_button}>Forgot Password?</Text>
         </TouchableOpacity>
     
-        <TouchableOpacity style={styles.loginBtn} onPress={() => signIn(username, password)}>
+        <TouchableOpacity style={styles.loginBtn} onPress={() => signIn(auth_context, username, password)}>
             <Text style={styles.loginBtn}>LOGIN</Text>
         </TouchableOpacity>
     </View>
