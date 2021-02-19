@@ -10,7 +10,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { HomeFlow, AuthFlow } from './src/navigation/navigations';
 
 // context imports
-import { AuthContext, AuthProvider } from './src/contexts/auth_context';
+import { AuthContext, AuthProvider } from './src/contexts/main_context';
 
 // gui just for tests
 import {
@@ -21,13 +21,25 @@ import {
     Platform
 } from "react-native";
 
+// actions for contexts
+import { ActionConsumer, checkJWT } from './src/contexts/main_context_actions';
+
+// for actions to actually be provided with 
+// context, they need to be children of the
+// provider, and thats where this comes handy
+
 
 // App function
 function App(){
-
     // load the context state and changer(basically Context.Consumer)
     const auth_context = React.useContext(AuthContext);
     
+    // supply the ActionConsumer with the context
+    ActionConsumer(auth_context);
+
+    // create jwt check var
+    var jwt;
+
     // only do this once app is done rendering
     useEffect(() => {
         // change context's state to what init
@@ -36,7 +48,7 @@ function App(){
         // the later code can be compiled
         Init().then(
             (val) => {
-                auth_context.change_context({jwt: val});
+                jwt = checkJWT(val);
             }
         ).catch(
             (err) => {
@@ -44,14 +56,11 @@ function App(){
             }
         );
     });
-    
-    // then load the context's state
-    const jwt = auth_context.context.jwt;
 
     // return container, checking whether jwt exists or not
     return(
         <NavigationContainer>
-            {jwt == null ? (
+            {jwt === null ? (
                 <>
                     <AuthFlow/>
                 </>

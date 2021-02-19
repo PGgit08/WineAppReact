@@ -16,10 +16,13 @@ import axios from 'axios';
 import {SignIn} from '../storage';
 
 // context
-import {AuthContext} from '../contexts/auth_context';
+// import {AuthContext} from '../contexts/auth_context';s
 
 // config urls
 import {AUTH_ENDPOINTS} from '../config';
+
+// sign in action for context
+import { Context_SignIn } from '../contexts/main_context_actions';
 
 // sign in function
 const signIn = (username, password) => {
@@ -33,6 +36,7 @@ const signIn = (username, password) => {
         (res) => {
             // storage sign in
             SignIn(res.data);
+            Context_SignIn(res.data);
         }
     ).catch(
         (err) => {console.log(err)}
@@ -44,7 +48,6 @@ function Login({ navigation }){
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
-    const auth_context = React.useContext(AuthContext)
     // return jsx
     return (
         <View style={styles.container}>
@@ -78,7 +81,7 @@ function Login({ navigation }){
             <Text style={styles.forgot_button}>Forgot Password?</Text>
         </TouchableOpacity>
     
-        <TouchableOpacity style={styles.loginBtn} onPress={() => signIn(auth_context, username, password)}>
+        <TouchableOpacity style={styles.loginBtn} onPress={() => signIn(username, password)}>
             <Text style={styles.loginBtn}>LOGIN</Text>
         </TouchableOpacity>
     </View>

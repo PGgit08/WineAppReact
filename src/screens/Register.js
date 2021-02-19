@@ -16,10 +16,13 @@ import axios from 'axios';
 import {SignIn} from '../storage';
 
 // context
-import {AuthContext} from '../contexts/auth_context';
+// import {AuthContext} from '../contexts/auth_context';
 
 // config urls
 import {AUTH_ENDPOINTS} from '../config';
+
+// context action for login
+import { Context_SignIn } from '../contexts/main_context_actions';
 
 // sign in function
 const signIn = (username, password, email) => {
@@ -34,9 +37,7 @@ const signIn = (username, password, email) => {
         (res) => {
             // storage sign in
             SignIn(res.data);
-
-            // context save jwt
-            React.useContext(AuthContext).change_context({jwt: res.data});
+            Context_SignIn(res.data);
         }
     ).catch(
         (err) => {console.log(err)}

@@ -8,11 +8,12 @@ import {
     StyleSheet
 } from 'react-native';
 
-import {AuthContext} from '../contexts/main_context';
+// context action for signout
+import { Context_SignOut } from '../contexts/main_context_actions';
 
 const signOut = () => {
     SignOut();
-    useContext(AuthContext).change_context({jwt: null});
+    Context_SignOut();
 };
 
 function Profile(){
