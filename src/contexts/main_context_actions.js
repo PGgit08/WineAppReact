@@ -15,6 +15,33 @@ import { AUTH_ENDPOINTS } from '../config';
 // screens can import these functions really easily
 // and they can be used as event handlers
 
+// function to identify user based on 
+// jwt
+const IdentifyUser = dispatch => {
+    // send jwt as param
+    return (jwt) => {
+        // api request
+        // to identify person
+        axios.get(AUTH_ENDPOINTS.identify, {
+            headers: {
+                'Authorization': 'Bearer ' + jwt
+            }
+        }).then(
+            (res) => {
+                dispatch({
+                    type: 'updateUser',
+                    val: {
+                        username: res.data.username,
+                        email: res.data.email
+                    }
+                });
+            }
+        ).catch(
+            (err) => {console.log(err)}
+        );
+    };
+};
+
 const Context_SignIn = dispatch => {
     // return function explained in main_context
     return ({username, password}) => {
@@ -35,6 +62,38 @@ const Context_SignIn = dispatch => {
                     type: 'sign_in',
                     val: res.data
                 });
+                // identify user
+                IdentifyUser(dispatch)(res.data);
+            }
+        ).catch(
+            (err) => {console.log(err)}
+        );
+    };
+};
+
+
+const Context_Register = dispatch => {
+    return ({username, password, email}) => {
+        // api request
+        // try doing register
+        axios.get(AUTH_ENDPOINTS.register, {
+            params: {
+                username: username, 
+                password: password,
+                email: email
+            }
+        }).then(
+            (res) => {
+                // storage sign in
+                SignIn(res.data);
+                
+                // change context state
+                dispatch({
+                    type: 'sign_in',
+                    val: res.data
+                });
+                // identify user
+                IdentifyUser(dispatch)(res.data);
             }
         ).catch(
             (err) => {console.log(err)}
@@ -82,8 +141,10 @@ const setStoreId = dispatch => {
 
 // export all the functions
 export default {
+    IdentifyUser,
     Context_SignIn,
     Context_SignOut,
+    Context_Register,
     checkJWT,
     setStoreId
 };

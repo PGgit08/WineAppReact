@@ -11,7 +11,17 @@ import {
 import { AuthContext } from '../contexts/main_context';
 
 function Profile(){
-    const { Context_SignOut } = useContext(AuthContext).actions;
+    // get context info
+    const actions = useContext(AuthContext).actions;
+    const state = useContext(AuthContext).state;
+    
+    // profile info
+    var MyProfile = state.user;  
+
+    // actions
+    const { Context_SignOut } = actions.Context_SignOut;
+    const { ReloadUser } = actions.IdentifyUser;
+
 
     return(
         <View style={styles.container}>

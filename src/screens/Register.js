@@ -19,7 +19,7 @@ function Register({ navigation }){
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
 
-    const { Context_SignIn } = useContext(AuthContext).actions;
+    const { Context_Register } = useContext(AuthContext).actions;
 
     // return jsx
     return (
@@ -55,7 +55,9 @@ function Register({ navigation }){
             />
         </View>
         
-        <TouchableOpacity style={styles.loginBtn} onPress={() => console.log('bruh')}>
+        <TouchableOpacity style={styles.loginBtn} onPress={
+            () => Context_Register({username, password, email})
+        }>
             <Text style={styles.loginBtn}>REGISTER</Text>
         </TouchableOpacity>
     </View>

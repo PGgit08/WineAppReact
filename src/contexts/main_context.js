@@ -6,6 +6,10 @@ const ContextActions = require('./main_context_actions').default;
 // initial provider state
 var initialState = {
     jwt: null,
+    user: {
+        username: null, 
+        email: null
+    },
     store_id: null
 };
 
@@ -16,10 +20,20 @@ const reducer = (state, action) => {
             jwt: action.val
         };
         case 'sign_out': return {
-            jwt: null
+            jwt: null,
+            user: {
+                username: null,
+                email: null
+            }
         };
         case 'setStoreId': return {
             store_id: action.val
+        };
+        case 'updateUser': return {
+            user: {
+                username: action.val.username,
+                email: action.val.email
+            }
         };
         // if action.type isn't anything above
         default: console.log('why?'); return state;
