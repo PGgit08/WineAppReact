@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import {
   StyleSheet,
   Text,
@@ -9,46 +9,17 @@ import {
   Button
 } from "react-native";
 
-// api request lib
-import axios from 'axios';
-
-// storage
-import {SignIn} from '../storage';
-
 // context
-// import {AuthContext} from '../contexts/auth_context';
+import { AuthContext } from '../contexts/main_context';
 
-// config urls
-import {AUTH_ENDPOINTS} from '../config';
-
-// context action for login
-import { Context_SignIn } from '../contexts/main_context_actions';
-
-// sign in function
-const signIn = (username, password, email) => {
-    // try doing log in
-    axios.get(AUTH_ENDPOINTS.register, {
-        params: {
-            username: username, 
-            password: password,
-            email: email
-        }
-    }).then(
-        (res) => {
-            // storage sign in
-            SignIn(res.data);
-            Context_SignIn(res.data);
-        }
-    ).catch(
-        (err) => {console.log(err)}
-    );
-};
 
 function Register({ navigation }){
     // create function state
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
+
+    const { Context_SignIn } = useContext(AuthContext).actions;
 
     // return jsx
     return (
@@ -84,7 +55,7 @@ function Register({ navigation }){
             />
         </View>
         
-        <TouchableOpacity style={styles.loginBtn} onPress={() => signIn(username, password, email)}>
+        <TouchableOpacity style={styles.loginBtn} onPress={() => console.log('bruh')}>
             <Text style={styles.loginBtn}>REGISTER</Text>
         </TouchableOpacity>
     </View>

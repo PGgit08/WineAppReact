@@ -49,7 +49,7 @@ const AuthProvider = ({children}) => {
     // return provider with values
     return(
         <AuthContext.Provider value={{
-                context: state, 
+                state: state, 
                 actions: NewActions
             }}>
             {children}

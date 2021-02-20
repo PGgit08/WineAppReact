@@ -8,6 +8,9 @@ import {
 // api axios import
 import axios from 'axios';
 
+// config urls
+import { AUTH_ENDPOINTS } from '../config';
+
 // functions that change main_context's state
 // screens can import these functions really easily
 // and they can be used as event handlers

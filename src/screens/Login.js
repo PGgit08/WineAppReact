@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import {
   StyleSheet,
   Text,
@@ -9,44 +9,16 @@ import {
   Button
 } from "react-native";
 
-// api request lib
-import axios from 'axios';
-
-// storage
-import {SignIn} from '../storage';
-
 // context
-// import {AuthContext} from '../contexts/auth_context';s
+import { AuthContext } from '../contexts/main_context';
 
-// config urls
-import {AUTH_ENDPOINTS} from '../config';
-
-// sign in action for context
-import { Context_SignIn } from '../contexts/main_context_actions';
-
-// sign in function
-const signIn = (username, password) => {
-    // try doing log in
-    axios.get(AUTH_ENDPOINTS.login, {
-        params: {
-            username: username, 
-            password: password
-        }
-    }).then(
-        (res) => {
-            // storage sign in
-            SignIn(res.data);
-            Context_SignIn(res.data);
-        }
-    ).catch(
-        (err) => {console.log(err)}
-    );
-};
 
 function Login({ navigation }){
     // create function state
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+
+    const { Context_SignIn } = useContext(AuthContext).actions;
 
     // return jsx
     return (
@@ -81,7 +53,7 @@ function Login({ navigation }){
             <Text style={styles.forgot_button}>Forgot Password?</Text>
         </TouchableOpacity>
     
-        <TouchableOpacity style={styles.loginBtn} onPress={() => signIn(username, password)}>
+        <TouchableOpacity style={styles.loginBtn} onPress={() => Context_SignIn({username, password})}>
             <Text style={styles.loginBtn}>LOGIN</Text>
         </TouchableOpacity>
     </View>

@@ -1,9 +1,6 @@
 // imports
 // react as usual
-import React, { useEffect } from 'react';
-
-// storage imports
-import { Init } from './src/storage';
+import React, { useEffect, useContext } from 'react';
 
 // navigation imports
 import { NavigationContainer } from '@react-navigation/native';
@@ -21,46 +18,23 @@ import {
     Platform
 } from "react-native";
 
-// actions for contexts
-import { ActionConsumer, checkJWT } from './src/contexts/main_context_actions';
-
-// for actions to actually be provided with 
-// context, they need to be children of the
-// provider, and thats where this comes handy
-
 
 // App function
 function App(){
     // load the context state and changer(basically Context.Consumer)
-    const auth_context = React.useContext(AuthContext);
-    
-    // supply the ActionConsumer with the context
-    ActionConsumer(auth_context);
-
-    // create jwt check var
-    var jwt;
+    const context = useContext(AuthContext);
 
     // only do this once app is done rendering
     useEffect(() => {
-        // change context's state to what init
-        // function returns
-        // this is all async so that 
-        // the later code can be compiled
-        Init().then(
-            (val) => {
-                jwt = checkJWT(val);
-            }
-        ).catch(
-            (err) => {
-                console.log(err);
-            }
-        );
+        // context action to check jwt
+        // and update context
+        context.actions.checkJWT;
     });
 
     // return container, checking whether jwt exists or not
     return(
         <NavigationContainer>
-            {jwt === null ? (
+            {context.state.jwt === null ? (
                 <>
                     <AuthFlow/>
                 </>
