@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import {
   StyleSheet,
   Text,
@@ -27,7 +27,7 @@ function Login({ navigation }){
         <View>
             <Button 
             title='Register'
-            onPress={navigation.navigate('Register')}
+            onPress={() => navigation.navigate('Register')}
             />
         </View>
         <View style={styles.inputView}>
@@ -54,7 +54,7 @@ function Login({ navigation }){
         </TouchableOpacity>
     
         <TouchableOpacity style={styles.loginBtn} onPress={() => Context_SignIn({username, password})}>
-            <Text style={styles.loginBtn}>LOGIN</Text>
+            <Text>LOGIN</Text>
         </TouchableOpacity>
     </View>
     );
@@ -98,7 +98,6 @@ const styles = StyleSheet.create({
         height: 50,
         alignItems: "center",
         justifyContent: "center",
-        marginTop: 40,
         backgroundColor: "#FF1493"
     }
 });

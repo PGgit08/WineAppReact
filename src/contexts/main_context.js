@@ -41,7 +41,7 @@ const reducer = (state, action) => {
 }
 
 // create the context
-const AuthContext = createContext(initialState);
+const AuthContext = createContext();
 
 // create the provider
 const AuthProvider = ({children}) => {

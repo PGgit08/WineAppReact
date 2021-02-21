@@ -102,7 +102,7 @@ const Context_Register = dispatch => {
 };
 
 const Context_SignOut = dispatch => {
-    return () => {
+    return (navigation) => {
         // storage signout
         SignOut();
         // context signout
@@ -119,6 +119,7 @@ const checkJWT = dispatch => {
         Init().then((val) => {
             // even if val is null
             // the jwt will still be set to null
+            console.log(val);
             dispatch({
                 type: 'sign_in',
                 val: val

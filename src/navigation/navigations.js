@@ -15,20 +15,29 @@ import Profile from '../screens/Profile';
 
 
 // navigation imports
-import {createStackNavigator} from '@react-navigation/stack';
-import {NavigationContainer} from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-// get api endpoints
-import {AUTH_ENDPOINTS} from '../config';
-
+// for tab navigator
+const Tab = createBottomTabNavigator();
 export const HomeFlow = (state) => {
     // navigation stacks later here
-    return <Profile token={state.jwt}/>;
+    const home_navigation = (
+        <Tab.Navigator>
+            <Tab.Screen 
+                component={Profile}
+                name='Profile'
+            />
+        </Tab.Navigator>
+    );
+    return home_navigation;
 };
+
+// for authflow
+const Stack = createStackNavigator();
 
 // authFlow stack
 export const AuthFlow = () => {
-    const Stack = createStackNavigator();
     const auth_navigation = (
         <Stack.Navigator initialRouteName="Login">
             {/* Screens for login and register */}

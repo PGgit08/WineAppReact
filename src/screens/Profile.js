@@ -10,7 +10,7 @@ import {
 // context
 import { AuthContext } from '../contexts/main_context';
 
-function Profile(){
+function Profile({ navigation }){
     // get context info
     const actions = useContext(AuthContext).actions;
     const state = useContext(AuthContext).state;
@@ -19,16 +19,22 @@ function Profile(){
     var MyProfile = state.user;  
 
     // actions
-    const { Context_SignOut } = actions.Context_SignOut;
+    const Context_SignOut = actions.Context_SignOut;
     const { ReloadUser } = actions.IdentifyUser;
 
-
+    // NOTE: since App is unmounted, it can't do conditional navigation(in return)
+    // instead the Auth Stack will be mounted
     return(
         <View style={styles.container}>
             <Text style={styles.msg}>
                 Logged In
             </Text>
-            <Button title="Log Out" onPress={Context_SignOut}/>
+            <Button title="Log Out" onPress={
+                () => {
+                    Context_SignOut();
+                    // navigation.navigate("Auth");
+                }
+            }/>
         </View>
     );
 };

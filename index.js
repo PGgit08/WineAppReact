@@ -4,6 +4,8 @@ import React, { useEffect, useContext } from 'react';
 
 // navigation imports
 import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+
 import { HomeFlow, AuthFlow } from './src/navigation/navigations';
 
 // context imports
@@ -19,6 +21,9 @@ import {
 } from "react-native";
 
 
+// app stack
+const AppStack = createStackNavigator();
+
 // App function
 function App(){
     // load the context state and changer(basically Context.Consumer)
@@ -29,20 +34,33 @@ function App(){
         // context action to check jwt
         // and update context
         context.actions.checkJWT;
-    });
+        console.log(context.state.jwt)
+    }, []);
 
     // return container, checking whether jwt exists or not
     return(
         <NavigationContainer>
-            {context.state.jwt === null ? (
-                <>
-                    <AuthFlow/>
-                </>
-            ) : (
-                <>
-                    <HomeFlow/>
-                </>
-            )};
+            <AppStack.Navigator>
+                {context.state.jwt === null ? (
+                    <>
+                        {/* AuthFlow */}
+                        <AppStack.Screen 
+                            options={{headerShown: false}}
+                            name = "Auth"
+                            component = {AuthFlow}
+                        />
+                    </>
+                ) : (
+                    <>
+                        {/* HomeFlow */}
+                        <AppStack.Screen 
+                            options={{headerShown: false}}
+                            name = "Home"
+                            component = {HomeFlow}
+                        />
+                    </>
+                )}
+            </AppStack.Navigator>
         </NavigationContainer>
     );
 };

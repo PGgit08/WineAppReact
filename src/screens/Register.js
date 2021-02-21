@@ -58,7 +58,7 @@ function Register({ navigation }){
         <TouchableOpacity style={styles.loginBtn} onPress={
             () => Context_Register({username, password, email})
         }>
-            <Text style={styles.loginBtn}>REGISTER</Text>
+            <Text>REGISTER</Text>
         </TouchableOpacity>
     </View>
     );
@@ -102,7 +102,6 @@ const styles = StyleSheet.create({
         height: 50,
         alignItems: "center",
         justifyContent: "center",
-        marginTop: 40,
         backgroundColor: "#FF1493"
     }
 });
