@@ -8,33 +8,28 @@ import {
 } from 'react-native';
 
 // context
-import { AuthContext } from '../contexts/main_context';
+import { MainContext } from '../contexts/main_context';
 
 function Profile({ navigation }){
     // get context info
-    const actions = useContext(AuthContext).actions;
-    const state = useContext(AuthContext).state;
+    const actions = useContext(MainContext).actions;
+    const state = useContext(MainContext).state;
+
+    const server_info = state.back_end;
     
     // profile info
     var MyProfile = state.user;  
 
     // actions
     const Context_SignOut = actions.Context_SignOut;
-    const { ReloadUser } = actions.IdentifyUser;
+    const ReloadUser = actions.IdentifyUser;
 
-    // NOTE: since App is unmounted, it can't do conditional navigation(in return)
-    // instead the Auth Stack will be mounted
     return(
         <View style={styles.container}>
             <Text style={styles.msg}>
                 Logged In
             </Text>
-            <Button title="Log Out" onPress={
-                () => {
-                    Context_SignOut();
-                    // navigation.navigate("Auth");
-                }
-            }/>
+            <Button title="Log Out" onPress={Context_SignOut}/>
         </View>
     );
 };

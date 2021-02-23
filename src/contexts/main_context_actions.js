@@ -28,6 +28,16 @@ const IdentifyUser = dispatch => {
             }
         }).then(
             (res) => {
+                if(res.data.error){
+                    dispatch({
+                        type: 'serverError',
+                        val: {
+                            isError: true,
+                            errorMsg: res.data.mes
+                        }
+                    });
+                };
+
                 dispatch({
                     type: 'updateUser',
                     val: {

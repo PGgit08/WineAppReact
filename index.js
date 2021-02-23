@@ -9,7 +9,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { HomeFlow, AuthFlow } from './src/navigation/navigations';
 
 // context imports
-import { AuthContext, AuthProvider } from './src/contexts/main_context';
+import { MainContext, MainProvider } from './src/contexts/main_context';
 
 // gui just for tests
 import {
@@ -27,7 +27,7 @@ const AppStack = createStackNavigator();
 // App function
 function App(){
     // load the context state and changer(basically Context.Consumer)
-    const context = useContext(AuthContext);
+    const context = useContext(MainContext);
 
     // only do this once app is done rendering
     useEffect(() => {
@@ -79,9 +79,9 @@ const styles = StyleSheet.create({
 // full function for loading everything
 function Full_App(){
     return (
-        <AuthProvider>
+        <MainProvider>
             <App />
-        </AuthProvider>
+        </MainProvider>
     );
 };
 

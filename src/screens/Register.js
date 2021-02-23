@@ -10,7 +10,7 @@ import {
 } from "react-native";
 
 // context
-import { AuthContext } from '../contexts/main_context';
+import { MainContext } from '../contexts/main_context';
 
 
 function Register({ navigation }){
@@ -19,7 +19,7 @@ function Register({ navigation }){
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
 
-    const { Context_Register } = useContext(AuthContext).actions;
+    const { Context_Register } = useContext(MainContext).actions;
 
     // return jsx
     return (

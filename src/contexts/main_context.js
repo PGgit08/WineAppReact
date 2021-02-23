@@ -5,6 +5,10 @@ const ContextActions = require('./main_context_actions').default;
 
 // initial provider state
 var initialState = {
+    back_end: {
+        isError: null,
+        errorMsg: ""
+    },
     jwt: null,
     user: {
         username: null, 
@@ -35,16 +39,22 @@ const reducer = (state, action) => {
                 email: action.val.email
             }
         };
+        case 'serverError': return {
+            back_end: {
+                isError: action.val.isError,
+                errorMsg: action.val.errorMsg
+            }
+        };
         // if action.type isn't anything above
         default: console.log('why?'); return state;
     };
 }
 
 // create the context
-const AuthContext = createContext();
+const MainContext = createContext();
 
 // create the provider
-const AuthProvider = ({children}) => {
+const MainProvider = ({children}) => {
     // provider state part
     const [state, dispatch] = useReducer(
         reducer,
@@ -62,17 +72,17 @@ const AuthProvider = ({children}) => {
 
     // return provider with values
     return(
-        <AuthContext.Provider value={{
+        <MainContext.Provider value={{
                 state: state, 
                 actions: NewActions
             }}>
             {children}
-        </AuthContext.Provider>
+        </MainContext.Provider>
     )
 };
 
 // export 
 export {
-    AuthContext,
-    AuthProvider
+    MainContext,
+    MainProvider
 }

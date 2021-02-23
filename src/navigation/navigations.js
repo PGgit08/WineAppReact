@@ -10,7 +10,7 @@ import Login from '../screens/Login';
 import Register from '../screens/Register';
 
 // screen imports home
-import Map from '../screens/Map';
+import map from '../screens/Map';
 import Profile from '../screens/Profile';
 
 
@@ -23,11 +23,15 @@ const Tab = createBottomTabNavigator();
 export const HomeFlow = (state) => {
     // navigation stacks later here
     const home_navigation = (
-        <Tab.Navigator>
+        <Tab.Navigator initialRouteName="Profile">
             <Tab.Screen 
                 component={Profile}
                 name='Profile'
             />
+            {/* <Tab.Screen
+                component={map}
+                name='Map'
+            /> */}
         </Tab.Navigator>
     );
     return home_navigation;

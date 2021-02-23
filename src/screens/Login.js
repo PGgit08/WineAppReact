@@ -10,7 +10,7 @@ import {
 } from "react-native";
 
 // context
-import { AuthContext } from '../contexts/main_context';
+import { MainContext } from '../contexts/main_context';
 
 
 function Login({ navigation }){
@@ -18,7 +18,7 @@ function Login({ navigation }){
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
-    const { Context_SignIn } = useContext(AuthContext).actions;
+    const { Context_SignIn } = useContext(MainContext).actions;
 
     // return jsx
     return (
