@@ -6,7 +6,7 @@ const ContextActions = require('./main_context_actions').default;
 // initial provider state
 var initialState = {
     back_end: {
-        isError: null,
+        isError: false,
         errorMsg: ""
     },
     jwt: null,
@@ -21,9 +21,11 @@ var initialState = {
 const reducer = (state, action) => {
     switch (action.type){
         case 'sign_in': return {
+            ...state,
             jwt: action.val
         };
         case 'sign_out': return {
+            ...state,
             jwt: null,
             user: {
                 username: null,
@@ -31,20 +33,31 @@ const reducer = (state, action) => {
             }
         };
         case 'setStoreId': return {
+            ...state,
             store_id: action.val
         };
         case 'updateUser': return {
+            ...state,
             user: {
                 username: action.val.username,
                 email: action.val.email
             }
         };
-        case 'serverError': return {
+        case 'Backend_Update': return {
+            ...state,
             back_end: {
                 isError: action.val.isError,
                 errorMsg: action.val.errorMsg
             }
         };
+        case 'Backend_Refresh': return {
+            ...state,
+            back_end: {
+                isError: false,
+                errorMsg: ""
+            }
+        };
+
         // if action.type isn't anything above
         default: console.log('why?'); return state;
     };

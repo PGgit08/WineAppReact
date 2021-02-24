@@ -5,11 +5,9 @@ import {
     Init
 } from '../storage';
 
-// api axios import
-import axios from 'axios';
 
-// config urls
-import { AUTH_ENDPOINTS } from '../config';
+// api request imports
+import { default as AUTH_API } from '../api_handling/auth_requests';
 
 // functions that change main_context's state
 // screens can import these functions really easily
@@ -22,111 +20,60 @@ const IdentifyUser = dispatch => {
     return (jwt) => {
         // api request
         // to identify person
-        axios.get(AUTH_ENDPOINTS.identify, {
-            headers: {
-                'Authorization': 'Bearer ' + jwt
-            }
-        }).then(
-            (res) => {
-                if(res.data.error){
-                    dispatch({
-                        type: 'serverError',
-                        val: {
-                            isError: true,
-                            errorMsg: res.data.mes
-                        }
-                    });
-                };
-
-                dispatch({
-                    type: 'updateUser',
-                    val: {
-                        username: res.data.username,
-                        email: res.data.email
-                    }
-                });
-            }
-        ).catch(
-            (err) => {console.log(err)}
-        );
+        // and get their posts + creds
     };
 };
 
 const Context_SignIn = dispatch => {
     // return function explained in main_context
-    return ({username, password}) => {
+    return async ({username, password}) => {
         // api request
         // try doing log in
-        axios.get(AUTH_ENDPOINTS.login, {
-            params: {
-                username: username, 
-                password: password
-            }
-        }).then(
+        await AUTH_API.login({username, password}).then(
             (res) => {
-                // storage sign in
-                SignIn(res.data);
-                
-                // change context state
                 dispatch({
-                    type: 'sign_in',
+                    type:'sign_in',
                     val: res.data
                 });
-                // identify user
-                IdentifyUser(dispatch)(res.data);
+
+                SignIn(res.data);
             }
-        ).catch(
-            (err) => {console.log(err)}
-        );
+        ).catch((err_obj) => Backend_Update(dispatch)(err_obj));
     };
 };
 
 
 const Context_Register = dispatch => {
-    return ({username, password, email}) => {
-        // api request
-        // try doing register
-        axios.get(AUTH_ENDPOINTS.register, {
-            params: {
-                username: username, 
-                password: password,
-                email: email
-            }
-        }).then(
+    return async ({username, password, email}) => {
+        await AUTH_API.register({username, password, email}).then(
             (res) => {
-                // storage sign in
-                SignIn(res.data);
-                
-                // change context state
                 dispatch({
                     type: 'sign_in',
                     val: res.data
                 });
-                // identify user
-                IdentifyUser(dispatch)(res.data);
+
+                SignIn(res.data);
             }
-        ).catch(
-            (err) => {console.log(err)}
-        );
+        ).catch((err_obj) => Backend_Update(dispatch)(err_obj));
     };
 };
 
 const Context_SignOut = dispatch => {
-    return (navigation) => {
-        // storage signout
-        SignOut();
+    return () => {
         // context signout
         dispatch({
             type: 'sign_out'
         });
+        // storage signout
+        SignOut();
     };
 };
 
-const checkJWT = dispatch => {
-    return () => {
+const checkJWT = async dispatch => {
+    return async () => {
         // check for token 
         // asyncronously
-        Init().then((val) => {
+        await Init().then((val) => {
             // even if val is null
             // the jwt will still be set to null
             console.log(val);
@@ -149,6 +96,25 @@ const setStoreId = dispatch => {
     };
 };
 
+const Backend_Update = dispatch => {
+    return (errorObj) => {
+        dispatch({
+            type: "Backend_Update",
+            val: {
+                isError: errorObj.isError,
+                errorMsg: errorObj.errorMsg
+            }
+        });
+    };
+};
+
+const Backend_Refresh = dispatch => {
+    return () => {
+        dispatch({
+            type: "Backend_Refresh"
+        });
+    };
+};
 
 // export all the functions
 export default {
@@ -157,5 +123,7 @@ export default {
     Context_SignOut,
     Context_Register,
     checkJWT,
-    setStoreId
+    setStoreId,
+    Backend_Update,
+    Backend_Refresh
 };

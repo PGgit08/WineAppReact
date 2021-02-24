@@ -12,7 +12,6 @@ import {
 // context
 import { MainContext } from '../contexts/main_context';
 
-
 function Login({ navigation }){
     // create function state
     const [username, setUsername] = useState('');

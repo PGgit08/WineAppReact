@@ -20,6 +20,8 @@ import {
     Platform
 } from "react-native";
 
+// if api error
+import API_ErrorHandler from './src/api_handling/ErrorHandler';
 
 // app stack
 const AppStack = createStackNavigator();
@@ -34,7 +36,6 @@ function App(){
         // context action to check jwt
         // and update context
         context.actions.checkJWT;
-        console.log(context.state.jwt)
     }, []);
 
     // return container, checking whether jwt exists or not
@@ -81,6 +82,7 @@ function Full_App(){
     return (
         <MainProvider>
             <App />
+            <API_ErrorHandler/>
         </MainProvider>
     );
 };
