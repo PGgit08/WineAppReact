@@ -31,6 +31,7 @@ const Context_SignIn = dispatch => {
         // try doing log in
         await AUTH_API.login({username, password}).then(
             (res) => {
+                console.log('ok');
                 dispatch({
                     type:'sign_in',
                     val: res.data
@@ -69,14 +70,13 @@ const Context_SignOut = dispatch => {
     };
 };
 
-const checkJWT = async dispatch => {
+const checkJWT = dispatch => {
     return async () => {
         // check for token 
         // asyncronously
         await Init().then((val) => {
             // even if val is null
             // the jwt will still be set to null
-            console.log(val);
             dispatch({
                 type: 'sign_in',
                 val: val

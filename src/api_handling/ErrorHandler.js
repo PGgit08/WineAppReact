@@ -1,11 +1,20 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { Alert, Button, View } from 'react-native';
 import { MainContext } from '../contexts/main_context';
 
+const useError = () => {
+    return useContext(MainContext);
+}; 
+
 export default function API_ErrorHandler(){
-    const back_end = useContext(MainContext).state.back_end;
-    // console.log(useContext(MainContext));
-    const { Backend_Refresh } = useContext(MainContext).actions;
+    const back_end = useError().state.back_end;
+    const { Backend_Refresh } = useError().actions;
+
+    useEffect(() => {
+        Backend_Refresh();
+        console.log('backend, refreshed');
+        console.log(back_end);
+    }, []);
 
     const alertError = () => {
         Alert.alert(
@@ -24,8 +33,8 @@ export default function API_ErrorHandler(){
             {/* basic error, like this user already exists */}
             {back_end.isError === true ? (
                 <>
-                    {alert(back_end.errorMsg)}
-                    {Backend_Refresh()}  
+                    {alert(back_end.errorMsg)};
+                    {/* {Backend_Refresh()}; */}
                 </>
             ) : (
                 <>

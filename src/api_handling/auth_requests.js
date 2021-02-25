@@ -20,7 +20,7 @@ const CheckResponse = (res) => {
             // there will be no error
             // in some cases, like login
             // which just returns JWT
-            resolve(res.data);
+            resolve(res);
         };
     });
 };

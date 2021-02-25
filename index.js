@@ -35,14 +35,14 @@ function App(){
     useEffect(() => {
         // context action to check jwt
         // and update context
-        context.actions.checkJWT;
+        context.actions.checkJWT();
     }, []);
 
     // return container, checking whether jwt exists or not
     return(
         <NavigationContainer>
             <AppStack.Navigator>
-                {context.state.jwt === null ? (
+                {context.state.jwt === null || context.state.jwt === undefined? (
                     <>
                         {/* AuthFlow */}
                         <AppStack.Screen 
