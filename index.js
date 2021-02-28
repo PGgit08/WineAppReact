@@ -36,11 +36,19 @@ function App(){
         // context action to check jwt
         // and update context
         context.actions.checkJWT();
-    }, []);
+    },[]);
+
+    // if loading or not
+    if(context.state.storage_loading){
+        // rendering will occur before the useEffect
+        // so this is here
+        return 'loading';
+    };
 
     // return container, checking whether jwt exists or not
     return(
         <NavigationContainer>
+            {console.log('app_r')}
             <AppStack.Navigator>
                 {context.state.jwt === null || context.state.jwt === undefined? (
                     <>
@@ -81,7 +89,7 @@ const styles = StyleSheet.create({
 function Full_App(){
     return (
         <MainProvider>
-            {/* <API_ErrorHandler/> */}
+            <API_ErrorHandler/>
             <App />
         </MainProvider>
     );

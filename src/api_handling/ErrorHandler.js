@@ -32,6 +32,7 @@ export default function API_ErrorHandler(){
                 </>
             ) : (
                 <>
+                    {console.log('no error!')}
                 </>
             )}
             {/* advanced error, like 404 or internal 500 */}

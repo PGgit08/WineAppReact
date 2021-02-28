@@ -10,6 +10,7 @@ var initialState = {
         errorMsg: ""
     },
     jwt: null,
+    storage_loading: true,
     user: {
         username: null, 
         email: null
@@ -22,7 +23,8 @@ const reducer = (state, action) => {
     switch (action.type){
         case 'sign_in': return {
             ...state,
-            jwt: action.val
+            jwt: action.val,
+            storage_loading: false
         };
         case 'sign_out': return {
             ...state,
@@ -74,10 +76,6 @@ const MainProvider = ({children}) => {
         initialState
     );
 
-    useEffect(() => {
-        console.log('provider mounted');
-    }, []);
-
     const NewActions = {};
 
     for(let key in ContextActions){
@@ -94,6 +92,7 @@ const MainProvider = ({children}) => {
                 actions: NewActions
             }}>
             {children}
+            {console.log('provider_r')}
         </MainContext.Provider>
     )
 };
