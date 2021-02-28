@@ -81,8 +81,8 @@ const styles = StyleSheet.create({
 function Full_App(){
     return (
         <MainProvider>
+            {/* <API_ErrorHandler/> */}
             <App />
-            <API_ErrorHandler/>
         </MainProvider>
     );
 };

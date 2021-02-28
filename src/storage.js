@@ -13,7 +13,12 @@ export const Init = async () => {
     // this is returned as a promise
     // the func in app will deal
     // with this promise
-    return await AsyncStorage.getItem(USER_KEY);
+    try{
+        return await AsyncStorage.getItem(USER_KEY);
+    }
+    catch{
+        return undefined;
+    };
 };
 
 

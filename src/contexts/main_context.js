@@ -1,4 +1,4 @@
-import React, {createContext, useReducer} from 'react';
+import React, {createContext, useReducer, useEffect, useState} from 'react';
 
 // import actions for changing context's state
 const ContextActions = require('./main_context_actions').default;
@@ -73,7 +73,11 @@ const MainProvider = ({children}) => {
         reducer,
         initialState
     );
- 
+
+    useEffect(() => {
+        console.log('provider mounted');
+    }, []);
+
     const NewActions = {};
 
     for(let key in ContextActions){
