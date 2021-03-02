@@ -26,6 +26,7 @@ import API_ErrorHandler from './src/api_handling/ErrorHandler';
 // app stack
 const AppStack = createStackNavigator();
 
+
 // App function
 function App(){
     // load the context state and changer(basically Context.Consumer)
@@ -48,7 +49,7 @@ function App(){
     // return container, checking whether jwt exists or not
     return(
         <NavigationContainer>
-            {console.log('app_r')}
+            {/* {console.log('app re-render')} */}
             <AppStack.Navigator>
                 {context.state.jwt === null || context.state.jwt === undefined? (
                     <>

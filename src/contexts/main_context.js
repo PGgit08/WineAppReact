@@ -92,7 +92,7 @@ const MainProvider = ({children}) => {
                 actions: NewActions
             }}>
             {children}
-            {console.log('provider_r')}
+            {/* {console.log('provider re-render')} */}
         </MainContext.Provider>
     )
 };

@@ -26,10 +26,10 @@ const IdentifyUser = dispatch => {
 
 const Context_SignIn = dispatch => {
     // return function explained in main_context
-    return async ({username, password}) => {
+    return ({username, password}) => {
         // api request
         // try doing log in
-        await AUTH_API.login({username, password}).then(
+        AUTH_API.login({username, password}).then(
             (res) => {
                 console.log('ok');
                 dispatch({
@@ -45,8 +45,8 @@ const Context_SignIn = dispatch => {
 
 
 const Context_Register = dispatch => {
-    return async ({username, password, email}) => {
-        await AUTH_API.register({username, password, email}).then(
+    return ({username, password, email}) => {
+        AUTH_API.register({username, password, email}).then(
             (res) => {
                 dispatch({
                     type: 'sign_in',
@@ -71,10 +71,10 @@ const Context_SignOut = dispatch => {
 };
 
 const checkJWT = dispatch => {
-    return async () => {
+    return () => {
         // check for token 
         // asyncronously
-        await Init().then((val) => {
+        Init().then((val) => {
             // even if val is null
             // the jwt will still be set to null
             dispatch({
@@ -110,6 +110,7 @@ const Backend_Update = dispatch => {
 
 const Backend_Refresh = dispatch => {
     return () => {
+        console.log('back end refresh');
         dispatch({
             type: "Backend_Refresh"
         });
