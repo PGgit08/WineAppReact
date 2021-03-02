@@ -8,19 +8,52 @@ import {
 
 // api request imports
 import { default as AUTH_API } from '../api_handling/auth_requests';
+import { default as POST_API } from '../api_handling/post_requests';
 
 // functions that change main_context's state
 // screens can import these functions really easily
 // and they can be used as event handlers
 
-// function to identify user based on 
-// jwt
+const MakeError = dispatch => {
+    return (err_obj) => {
+        Backend_Update(dispatch)(err_obj);
+    };
+}
+
 const IdentifyUser = dispatch => {
     // send jwt as param
     return (jwt) => {
         // api request
         // to identify person
         // and get their posts + creds
+
+        let userData = {
+            username: "",
+            email: "",
+            posts: {}
+        };
+
+        // creds
+        AUTH_API.identify_user(jwt).then(
+            (res) => {
+                userData.username = res.data.username;
+                userData.email = res.data.email;
+            }
+        ).catch(MakeError(dispatch));
+
+        // posts
+        POST_API.identify_post(jwt).then(
+            (res) => {
+                userData.posts = res.data.posts;
+            }
+        ).catch(MakeError(dispatch));
+
+        // dispatch
+        console.log('got here');
+        dispatch({
+            type: 'updateUser',
+            val: userData
+        });
     };
 };
 
@@ -31,7 +64,7 @@ const Context_SignIn = dispatch => {
         // try doing log in
         AUTH_API.login({username, password}).then(
             (res) => {
-                console.log('ok');
+                // console.log('ok');
                 dispatch({
                     type:'sign_in',
                     val: res.data
@@ -39,7 +72,7 @@ const Context_SignIn = dispatch => {
 
                 SignIn(res.data);
             }
-        ).catch((err_obj) => Backend_Update(dispatch)(err_obj));
+        ).catch(MakeError(dispatch));
     };
 };
 
@@ -55,7 +88,7 @@ const Context_Register = dispatch => {
 
                 SignIn(res.data);
             }
-        ).catch((err_obj) => Backend_Update(dispatch)(err_obj));
+        ).catch(MakeError(dispatch));
     };
 };
 
@@ -110,7 +143,7 @@ const Backend_Update = dispatch => {
 
 const Backend_Refresh = dispatch => {
     return () => {
-        console.log('back end refresh');
+        // console.log('back end refresh');
         dispatch({
             type: "Backend_Refresh"
         });
@@ -125,6 +158,5 @@ export default {
     Context_Register,
     checkJWT,
     setStoreId,
-    Backend_Update,
     Backend_Refresh
 };

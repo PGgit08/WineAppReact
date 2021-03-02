@@ -13,7 +13,8 @@ var initialState = {
     storage_loading: true,
     user: {
         username: null, 
-        email: null
+        email: null,
+        posts: {}
     },
     store_id: null
 };
@@ -31,7 +32,8 @@ const reducer = (state, action) => {
             jwt: null,
             user: {
                 username: null,
-                email: null
+                email: null,
+                posts: {}
             }
         };
         case 'setStoreId': return {
@@ -42,7 +44,8 @@ const reducer = (state, action) => {
             ...state,
             user: {
                 username: action.val.username,
-                email: action.val.email
+                email: action.val.email,
+                posts: action.val.posts
             }
         };
         case 'Backend_Update': return {
@@ -67,6 +70,7 @@ const reducer = (state, action) => {
 
 // create the context
 const MainContext = createContext();
+
 
 // create the provider
 const MainProvider = ({children}) => {
@@ -101,4 +105,4 @@ const MainProvider = ({children}) => {
 export {
     MainContext,
     MainProvider
-}
+};

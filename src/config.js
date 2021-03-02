@@ -12,6 +12,7 @@ export const AUTH_ENDPOINTS = {
     identify: auth_base + '/identify'
 };
 
-export const POSTS_ENDPOINTS = {
-    get: posts_base + '/get'
+export const POST_ENDPOINTS = {
+    get: posts_base + '/get',
+    add: posts_base + '/add'
 };

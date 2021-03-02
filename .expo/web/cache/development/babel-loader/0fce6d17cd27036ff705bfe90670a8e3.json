@@ -1,1 +1,0 @@
-{"ast":null,"code":"export var USER_KEY = 'token';","map":{"version":3,"sources":["C:/Users/peter/Peter-First-App/src/config.js"],"names":["USER_KEY"],"mappings":"AACA,OAAO,IAAMA,QAAQ,GAAG,OAAjB","sourcesContent":["// async storage token\r\nexport const USER_KEY = 'token';"]},"metadata":{},"sourceType":"module"}

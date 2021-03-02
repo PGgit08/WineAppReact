@@ -2,7 +2,6 @@ import React, { useContext, useState, useEffect } from 'react';
 import { MainContext } from '../contexts/main_context';
 
 import Alert from '../components/alert';
-import { back } from 'react-native/Libraries/Animated/src/Easing';
 
 const useError = () => {
     return useContext(MainContext);
@@ -17,16 +16,33 @@ export default function API_ErrorHandler(){
     return (
         <>
             {/* {console.log('error handler re-render')} */}
-            {/* basic error, like this user already exists */}
             {back_end.isError === true ? (
                 <>
                     {Alert({error, Backend_Refresh})}
                 </>
             ) : (
                 <>
-                    {/* {console.log('no error!')} */}
                 </>
             )}
         </>
     );
+};
+
+export const CheckResponse = (res) => {
+    return new Promise((resolve, reject) => {
+        if(res.data.error == 1){
+            reject(
+                {
+                    isError: true,
+                    errorMsg: res.data.mes
+                }
+            );
+        }
+        if(res.data.error == 0 || !res.data.hasOwnProperty("error")){
+            // there will be no error
+            // in some cases, like login
+            // which just returns JWT
+            resolve(res);
+        };
+    });
 };

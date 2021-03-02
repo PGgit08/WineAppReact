@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 
 import {
     View,
@@ -13,16 +13,18 @@ import { MainContext } from '../contexts/main_context';
 function Profile({ navigation }){
     // get context info
     const actions = useContext(MainContext).actions;
-    const state = useContext(MainContext).state;
-
-    const server_info = state.back_end;
+    const context_state = useContext(MainContext).state;
     
     // profile info
-    var MyProfile = state.user;  
+    var UserProfile = context_state.user;  
 
     // actions
     const Context_SignOut = actions.Context_SignOut;
     const ReloadUser = actions.IdentifyUser;
+
+    useEffect(() => {
+        ReloadUser(context_state.jwt);
+    }, []);
 
     return(
         <View style={styles.container}>
@@ -30,6 +32,7 @@ function Profile({ navigation }){
                 Logged In
             </Text>
             <Button title="Log Out" onPress={Context_SignOut}/>
+            {console.log(UserProfile)}
         </View>
     );
 };
