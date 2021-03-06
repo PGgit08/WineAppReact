@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { MainContext } from '../contexts/main_context';
 
+// alert component
 import Alert from '../components/alert';
 
 const useError = () => {

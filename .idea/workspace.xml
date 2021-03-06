@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c4a9b5c1-6c61-4522-9091-0e9f8271fe1e" name="Default Changelist" comment="" />
+    <list default="true" id="c4a9b5c1-6c61-4522-9091-0e9f8271fe1e" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.expo/packager-info.json" beforeDir="false" afterPath="$PROJECT_DIR$/.expo/packager-info.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/babel.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/babel.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/api_handling/ErrorHandler.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/api_handling/ErrorHandler.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/api_handling/auth_requests.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/api_handling/auth_requests.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/contexts/main_context.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/contexts/main_context.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/contexts/main_context_actions.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/contexts/main_context_actions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/navigation/navigations.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/navigation/navigations.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/screens/Profile.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/Profile.js" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -40,10 +49,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="137" y="19" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.728@0.0.1366.728" timestamp="1607999021381" />
-    <state x="100" y="100" width="1166" height="528" key="AVDManager" timestamp="1608007868606">
+    <state x="100" y="100" width="1166" height="528" key="AVDManager" timestamp="1614991426154">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="100" y="100" width="1166" height="528" key="AVDManager/0.0.1366.728@0.0.1366.728" timestamp="1608007868606" />
+    <state x="100" y="100" width="1166" height="528" key="AVDManager/0.0.1366.728@0.0.1366.728" timestamp="1614991426154" />
     <state x="463" y="105" key="FileChooserDialogImpl" timestamp="1614693845206">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -52,9 +61,9 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="184" y="9" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1608006450108" />
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1614693859975">
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1614991316305">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1614693859975" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1614991316305" />
   </component>
 </project>

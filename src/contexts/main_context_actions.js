@@ -10,50 +10,42 @@ import {
 import { default as AUTH_API } from '../api_handling/auth_requests';
 import { default as POST_API } from '../api_handling/post_requests';
 
-// functions that change main_context's state
-// screens can import these functions really easily
-// and they can be used as event handlers
 
+// update server when error
 const MakeError = dispatch => {
     return (err_obj) => {
         Backend_Update(dispatch)(err_obj);
     };
 }
 
+// functions that change main_context's state
+// screens can import these functions really easily
+// and they can be used as event handlers
 const IdentifyUser = dispatch => {
     // send jwt as param
-    return (jwt) => {
+    return async (jwt) => {
         // api request
         // to identify person
-        // and get their posts + creds
+        // and get their posts + creds        
+        try{
+            // get credentials + posts
+            const creds_res = (await AUTH_API.identify_user(jwt)).data;
+            const posts_res = (await POST_API.identify_post(jwt)).data;
 
-        let userData = {
-            username: "",
-            email: "",
-            posts: {}
+            // then dispatch
+            dispatch({
+                type: 'updateUser',
+                val: {
+                    username: creds_res.username,
+                    email: creds_res.email,
+                    posts: posts_res.posts
+                }
+            });
+        }
+        catch(err){
+            // make server error
+            MakeError(dispatch)(err);
         };
-
-        // creds
-        AUTH_API.identify_user(jwt).then(
-            (res) => {
-                userData.username = res.data.username;
-                userData.email = res.data.email;
-            }
-        ).catch(MakeError(dispatch));
-
-        // posts
-        POST_API.identify_post(jwt).then(
-            (res) => {
-                userData.posts = res.data.posts;
-            }
-        ).catch(MakeError(dispatch));
-
-        // dispatch
-        console.log('got here');
-        dispatch({
-            type: 'updateUser',
-            val: userData
-        });
     };
 };
 
@@ -158,5 +150,6 @@ export default {
     Context_Register,
     checkJWT,
     setStoreId,
-    Backend_Refresh
+    Backend_Refresh,
+    Backend_Update
 };

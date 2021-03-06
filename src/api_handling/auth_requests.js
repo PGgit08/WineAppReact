@@ -48,7 +48,7 @@ const identify_user = async (jwt) => {
                 'Authorization': `Bearer ${jwt}`
             }
         });
-        CheckResponse(res);
+        return CheckResponse(res);
     }
     catch(err){
         console.log(err);

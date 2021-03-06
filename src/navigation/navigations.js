@@ -18,42 +18,48 @@ import Profile from '../screens/Profile';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-// for tab navigator
-const Tab = createBottomTabNavigator();
-export const HomeFlow = (state) => {
-    // navigation stacks later here
+// for profile navigation (posts, liked, saved, etc.)
+const ProfileTabs = createBottomTabNavigator();
+export const ProfileTab = () => {
+    const profile_tabs = (
+        <ProfileTabs.Navigator>
+            {/* Here Posts, Liked, Saved, etc will be added */}
+        </ProfileTabs.Navigator>
+    ) 
+}
+
+// for stack navigator
+const HomeStack = createStackNavigator();
+export const HomeFlow = () => {
+    // navigation stacks for home (map -> profile)
     const home_navigation = (
-        <Tab.Navigator initialRouteName="Profile">
-            <Tab.Screen 
+        <HomeStack.Navigator initialRouteName="Profile">
+            <HomeStack.Screen 
                 component={Profile}
                 name='Profile'
             />
-            {/* <Tab.Screen
-                component={map}
-                name='Map'
-            /> */}
-        </Tab.Navigator>
+        </HomeStack.Navigator>
     );
     return home_navigation;
 };
 
 // for authflow
-const Stack = createStackNavigator();
+const AuthStack = createStackNavigator();
 
 // authFlow stack
 export const AuthFlow = () => {
     const auth_navigation = (
-        <Stack.Navigator initialRouteName="Login">
+        <AuthStack.Navigator initialRouteName="Login">
             {/* Screens for login and register */}
-            <Stack.Screen
+            <AuthStack.Screen
                 name="Login" 
                 component={Login} 
             />            
-            <Stack.Screen
+            <AuthStack.Screen
                 name="Register"
                 component={Register}
             />
-        </Stack.Navigator>
+        </AuthStack.Navigator>
     );
 
     // return stack

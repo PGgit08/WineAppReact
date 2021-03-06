@@ -12,9 +12,9 @@ var initialState = {
     jwt: null,
     storage_loading: true,
     user: {
-        username: null, 
-        email: null,
-        posts: {}
+        username: "", 
+        email: "",
+        posts: []
     },
     store_id: null
 };
