@@ -45,6 +45,7 @@ function Profile({ navigation }){
                 <View style={{flex: 1}}>
                     <Text style={styles.cred_text}> Username: { UserProfile.username } </Text>
                     <Text style={styles.cred_text}> Email: { UserProfile.email }</Text>
+                    <Button onPress={Context_SignOut} title="Sign Out"/>
                 </View>
             
             </View>

@@ -23,6 +23,8 @@ import {
 // if api error
 import API_ErrorHandler from './src/api_handling/ErrorHandler';
 
+import { registerRootComponent } from 'expo';
+
 // app stack
 const AppStack = createStackNavigator();
 
@@ -31,6 +33,7 @@ const AppStack = createStackNavigator();
 function App(){
     // load the context state and changer(basically Context.Consumer)
     const context = useContext(MainContext);
+    console.log(context);
 
     // only do this once app is done rendering
     useEffect(() => {
@@ -99,15 +102,15 @@ function Full_App(){
 
 // expo uses this registry method instead of registry component
 // when app launches maybe registry component will work
-// registerRootComponent(App);
+registerRootComponent(App);
 
 // for web
-AppRegistry.registerComponent("Peter-First-App", () => Full_App);
+// AppRegistry.registerComponent("Peter-First-App", () => Full_App);
 
 
-if (Platform.OS == "web"){
-    AppRegistry.runApplication("Peter-First-App", {
-        rootTag: document.getElementById('root')
-    });
-};
+// if (Platform.OS == "web"){
+//     AppRegistry.runApplication("Peter-First-App", {
+//         rootTag: document.getElementById('root')
+//     });
+// };
 

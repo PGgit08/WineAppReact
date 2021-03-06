@@ -23,10 +23,12 @@ const ProfileTabs = createBottomTabNavigator();
 export const ProfileTab = () => {
     const profile_tabs = (
         <ProfileTabs.Navigator>
-            {/* Here Posts, Liked, Saved, etc will be added */}
+            {/* Here Posts, Liked, Saved, etc are made */}
+            
         </ProfileTabs.Navigator>
-    ) 
-}
+    );
+    return profile_tabs;
+};
 
 // for stack navigator
 const HomeStack = createStackNavigator();
