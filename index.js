@@ -8,8 +8,9 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 import { HomeFlow, AuthFlow } from './src/navigation/navigations';
 
-// context imports
+// context imports(+ theme context)
 import { MainContext, MainProvider } from './src/contexts/main_context';
+import { ThemeProvider } from './src/contexts/theme_context';
 
 // gui just for tests
 import {
@@ -23,9 +24,16 @@ import {
 // if api error
 import API_ErrorHandler from './src/api_handling/ErrorHandler';
 
+// expo registering
 import { registerRootComponent } from 'expo';
 
-// app stack
+// safe area for app to run smoothly on all phones
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+
+// sort of like a "consumer" for the custom components using the theme
+import { GetTheme } from './src/components/custom';
+
+// app stack(navigation)
 const AppStack = createStackNavigator();
 
 
@@ -46,7 +54,7 @@ function App(){
     if(context.state.storage_loading){
         // rendering will occur before the useEffect
         // so this is here
-        return 'loading';
+        return <Text>loading</Text>;
     };
 
     // return container, checking whether jwt exists or not
@@ -92,17 +100,22 @@ const styles = StyleSheet.create({
 // full function for loading everything
 function Full_App(){
     return (
-        <MainProvider>
-            <API_ErrorHandler/>
-            <App />
-        </MainProvider>
+        <SafeAreaProvider>
+            <ThemeProvider>
+                <GetTheme/>
+                <MainProvider>
+                    <API_ErrorHandler/>
+                    <App />
+                </MainProvider>
+            </ThemeProvider>
+        </SafeAreaProvider>
     );
 };
 
 
 // expo uses this registry method instead of registry component
 // when app launches maybe registry component will work
-registerRootComponent(App);
+registerRootComponent(Full_App);
 
 // for web
 // AppRegistry.registerComponent("Peter-First-App", () => Full_App);
