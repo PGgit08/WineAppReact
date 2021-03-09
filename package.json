@@ -32,10 +32,12 @@
     "react-native-vector-icons": "^8.1.0",
     "react-native-web": "~0.13.12",
     "react-navigation": "^4.4.3",
-    "react-navigation-stack": "^2.10.2"
+    "react-navigation-stack": "^2.10.2",
+    "styled-components": "^5.2.1"
   },
   "devDependencies": {
     "@babel/core": "~7.9.0",
+    "@types/styled-components": "^5.1.7",
     "babel-jest": "~25.2.6",
     "jest": "0.51",
     "react-test-renderer": "~16.13.1"

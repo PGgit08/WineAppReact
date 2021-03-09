@@ -6,11 +6,18 @@ import {
   View,
   TextInput,
   TouchableOpacity,
-  Button
+//   Button
 } from "react-native";
 
 // context
 import { MainContext } from '../contexts/main_context';
+
+// components
+import {
+    ButtonContainer,
+    ButtonText,
+    Input
+} from '../components/custom';
 
 function Login({ navigation }){
     // create function state
@@ -23,38 +30,23 @@ function Login({ navigation }){
     return (
         <View style={styles.container}>
         <StatusBar style="auto" />
-        <View>
-            <Button 
-            title='Register'
-            onPress={() => navigation.navigate('Register')}
-            />
-        </View>
-        <View style={styles.inputView}>
-            <TextInput
-                style={styles.TextInput}
-                placeholder="Username."
-                placeholderTextColor="#003f5c"
-                onChangeText={(u) => setUsername(u)}
-            />
-        </View>
-    
-        <View style={styles.inputView}>
-            <TextInput
-                style={styles.TextInput}
-                placeholder="Password."
-                placeholderTextColor="#003f5c"
-                secureTextEntry={true}
-                onChangeText={(p) => setPassword(p)}
-            />
-        </View>
-    
+        <Input 
+            onChangeText={(u) => setUsername(u)}
+            placeholder="Username"
+        />
+        <Input 
+            onChangeText={(p) => setPassword(p)}
+            placeholder="Password"
+            secureTextEntry={true}
+        />
+        
         <TouchableOpacity>
             <Text style={styles.forgot_button}>Forgot Password?</Text>
         </TouchableOpacity>
     
-        <TouchableOpacity style={styles.loginBtn} onPress={() => Context_SignIn({username, password})}>
-            <Text>LOGIN</Text>
-        </TouchableOpacity>
+        <ButtonContainer onPress={() => Context_SignIn({username, password})}>
+            <ButtonText>CONTINUE</ButtonText>
+        </ButtonContainer>
     </View>
     );
 }

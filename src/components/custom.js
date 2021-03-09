@@ -5,8 +5,54 @@ import React, { useContext } from 'react';
 // import theme context
 import { ThemeContext } from '../contexts/theme_context';
 
-var context;
+// styled componenets lib!
+import styled from 'styled-components/native';
 
+var theme = require('../config').THEME;
+
+// for setting context variable
 export const GetTheme = () => {
-    context = useContext(ThemeContext);
+    theme = useContext(ThemeContext);
+    return <></>;
 };
+
+export const Container = styled.View`
+    flex: 1
+`;
+
+export const ButtonContainer = styled.TouchableOpacity`
+    position: absolute;
+    width: 20%;
+    height: 10%;
+    left: 40%;
+    top: 70%;
+
+    background-color: ${theme.colors.main.red};
+    border-radius: 40px;
+`;
+
+
+export const ButtonText = styled.Text`
+    position: absolute;
+    left: 35%;
+    top: 32%;
+
+    font-family: ${theme.fonts.main.content};
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+`;
+
+export const Input = styled.TextInput`
+    width: 20%;
+    height: 10%;
+    margin-bottom: 1%;
+
+    font-size: 37px;
+    textAlign: center;
+    // font-family: ${theme.fonts.main.content}; 
+
+    background: ${theme.colors.main.gray};
+    border: 1px solid #000000;
+    box-sizing: border-box;
+`;
