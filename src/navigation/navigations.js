@@ -51,7 +51,7 @@ const AuthStack = createStackNavigator();
 // authFlow stack
 export const AuthFlow = () => {
     const auth_navigation = (
-        <AuthStack.Navigator initialRouteName="Login">
+        <AuthStack.Navigator initialRouteName="Login" screenOptions={{headerShown: false}}>
             {/* Screens for login and register */}
             <AuthStack.Screen
                 name="Login" 

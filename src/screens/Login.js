@@ -16,7 +16,8 @@ import { MainContext } from '../contexts/main_context';
 import {
     ButtonContainer,
     ButtonText,
-    Input
+    Input,
+    Container
 } from '../components/custom';
 
 function Login({ navigation }){
@@ -29,25 +30,26 @@ function Login({ navigation }){
     // return jsx
     return (
         <View style={styles.container}>
-        <StatusBar style="auto" />
-        <Input 
-            onChangeText={(u) => setUsername(u)}
-            placeholder="Username"
-        />
-        <Input 
-            onChangeText={(p) => setPassword(p)}
-            placeholder="Password"
-            secureTextEntry={true}
-        />
+            <StatusBar style="auto" />
+
+            <Input 
+                onChangeText={(u) => setUsername(u)}
+                placeholder="Username"
+            />
+            <Input 
+                onChangeText={(p) => setPassword(p)}
+                placeholder="Password"
+                secureTextEntry={true}
+            />
+            
+            <TouchableOpacity style={{marginBottom:15, marginTop:20}}>
+                <Text>Forgot Password?</Text>
+            </TouchableOpacity>
         
-        <TouchableOpacity>
-            <Text style={styles.forgot_button}>Forgot Password?</Text>
-        </TouchableOpacity>
-    
-        <ButtonContainer onPress={() => Context_SignIn({username, password})}>
-            <ButtonText>CONTINUE</ButtonText>
-        </ButtonContainer>
-    </View>
+            <ButtonContainer onPress={() => Context_SignIn({username, password})}>
+                <ButtonText>Continue</ButtonText>
+            </ButtonContainer>
+        </View>
     );
 }
 

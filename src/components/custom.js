@@ -17,8 +17,13 @@ export const GetTheme = () => {
 };
 
 export const Container = styled.View`
-    flex: 1
+    flex: 1;
+    justifyContent: center;
+    alignItems: center;
+    background-color: blue;
 `;
+
+export const Auth_Header = styled.View``
 
 export const ButtonContainer = styled.TouchableOpacity`
     position: absolute;
@@ -29,18 +34,19 @@ export const ButtonContainer = styled.TouchableOpacity`
 
     background-color: ${theme.colors.main.red};
     border-radius: 40px;
+    justifyContent: center;
+    alignItems: center;
 `;
 
 
 export const ButtonText = styled.Text`
     position: absolute;
-    left: 35%;
     top: 32%;
 
     font-family: ${theme.fonts.main.content};
     font-style: normal;
     font-weight: normal;
-    font-size: 16px;
+    font-size: 20px;
 `;
 
 export const Input = styled.TextInput`
@@ -50,7 +56,6 @@ export const Input = styled.TextInput`
 
     font-size: 37px;
     textAlign: center;
-    // font-family: ${theme.fonts.main.content}; 
 
     background: ${theme.colors.main.gray};
     border: 1px solid #000000;
