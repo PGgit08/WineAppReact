@@ -10,7 +10,7 @@ import { HomeFlow, AuthFlow } from './src/navigation/navigations';
 
 // context imports(+ theme context)
 import { MainContext, MainProvider } from './src/contexts/main_context';
-import { ThemeProvider } from './src/contexts/theme_context';
+// import { ThemeProvider } from './src/contexts/theme_context';
 
 // gui just for tests
 import {
@@ -25,17 +25,19 @@ import {
 import API_ErrorHandler from './src/api_handling/ErrorHandler';
 
 // expo registering
-import { registerRootComponent } from 'expo';
+// import { registerRootComponent } from 'expo';
 
 // safe area for app to run smoothly on all phones
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
-// sort of like a "consumer" for the custom components using the theme
-import { GetTheme } from './src/components/custom';
+// UI imports, ThemeProvider
+import { ThemeProvider, Button } from 'react-native-elements';
+
+// THEME object for the ThemeProvider
+import { THEME } from './src/config';
 
 // app stack(navigation)
 const AppStack = createStackNavigator();
-
 
 // App function
 function App(){
@@ -101,8 +103,7 @@ const styles = StyleSheet.create({
 function Full_App(){
     return (
         <SafeAreaProvider>
-            <ThemeProvider>
-                <GetTheme/>
+            <ThemeProvider theme={THEME}>
                 <MainProvider>
                     <API_ErrorHandler/>
                     <App />
