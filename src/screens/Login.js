@@ -2,7 +2,6 @@ import { StatusBar } from "expo-status-bar";
 import React, { useState, useContext, useEffect } from "react";
 import {
   StyleSheet,
-  Text,
   View,
   TextInput,
   TouchableOpacity,
@@ -14,10 +13,14 @@ import { MainContext } from '../contexts/main_context';
 
 // UI, custom componenets
 import {
-    Container,
-    PageTitle,
-    CustomButton
+    Container
 } from '../components/custom';
+
+import {
+    SocialIcon,
+    Button,
+    Text
+} from 'react-native-elements';
 
 function Login({ navigation }){
     // create function state
@@ -29,17 +32,33 @@ function Login({ navigation }){
     // return jsx
     return (
         <Container>
-            <PageTitle>
+            <Text h1>
                 Hello
-            </PageTitle>
+            </Text>
 
-            <CustomButton
-                title="POOP"
-            />
+            <View style={{width: '20%', margin: 'auto'}}>
+                <Button
+                    title="Continue Login"
+                />
+            </View>
+
+            <View style={{width: ''}}>
+                
+            </View>
         </Container>
     );
 }
 
+const styles = StyleSheet.create(
+    {
+        button_container: {
+            flexDirection: 'column',
+            flex: 1,
+            alignItems: 'center',
+            justifyContent: 'center',
+        }
+    }
+)
 
 // export function
 export default Login;

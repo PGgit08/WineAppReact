@@ -19,8 +19,8 @@ export const POST_ENDPOINTS = {
     add: posts_base + '/add'
 };
 
-// theme object for app
-export const THEME = {
+// basic things for theme
+const theme_basic = {
     colors: {
         main: {
             red: "#DE3232",
@@ -36,3 +36,22 @@ export const THEME = {
         }
     }
 };
+
+// theme object for app
+export const THEME = {
+    Button: {
+        buttonStyle: {
+            backgroundColor: theme_basic.colors.main.red,
+            borderRadius: 40,
+            margin: 'auto'
+        }
+    },
+    Text: {
+        h1Style: {
+            margin: 'auto',
+            color: theme_basic.colors.main.red,
+            fontFamily: theme_basic.fonts.main.title
+        }
+    }
+};
+
