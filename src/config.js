@@ -31,7 +31,7 @@ export const THEME = {
     },
     fonts: {
         main: {
-            title: "Sacramento",
+            title: "Sacramento-Regular",
             content: "Assistant"
         }
     }

@@ -13,6 +13,7 @@ import {
     ThemeConsumer,
     Header,
     Text,
+    Button,
     useTheme
 } from 'react-native-elements';
 
@@ -31,16 +32,16 @@ export function Container({ children }){
 };
 
 
-export function ScreenHeader({ props }){
-    const { text } = props;
-    const theme = useTheme();
+export function ScreenHeader({ children }){
+    const { text } = children;
+    const theme = useTheme().theme;
     return(
         <Header
             placement="center"
             centerComponent={
                 <View>
                     <Text h1 h1Style={
-                        {fontFamily:theme.font.main.title, fontSize:60, color:theme.colors.main.black}
+                        {fontFamily:theme.fonts.main.title, fontSize:60, color:theme.colors.main.black}
                     }>
                         { text }
                     </Text>
@@ -54,13 +55,35 @@ export function ScreenHeader({ props }){
     );
 };
 
-export function PageTitle(){
-    // nothing here yet
+export function PageTitle({ children }){
+    const theme = useTheme().theme;
+    // console.log(text);
+    return(
+        <Text h1 h1Style={
+            {
+                fontFamily: theme.fonts.main.title,
+                fontSize: 60,
+                color: theme.colors.main.red,
+                textAlign: 'center'
+            }
+        }>
+            { children }
+        </Text>
+    );
 };
 
 export function CustomButton({ props }){
+    const theme = useTheme().theme;
+
     return(
-        // button will be here
+        <Button
+            buttonStyle={{
+                justifyContent: 'center',
+                width: 10
+            }}
+            
+            title="PROPS" 
+        />
     );
 };
 

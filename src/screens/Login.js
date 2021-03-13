@@ -14,7 +14,9 @@ import { MainContext } from '../contexts/main_context';
 
 // UI, custom componenets
 import {
-    Container
+    Container,
+    PageTitle,
+    CustomButton
 } from '../components/custom';
 
 function Login({ navigation }){
@@ -27,7 +29,13 @@ function Login({ navigation }){
     // return jsx
     return (
         <Container>
-            
+            <PageTitle>
+                Hello
+            </PageTitle>
+
+            <CustomButton
+                title="POOP"
+            />
         </Container>
     );
 }
