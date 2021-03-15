@@ -25,13 +25,13 @@ import {
 import API_ErrorHandler from './src/api_handling/ErrorHandler';
 
 // expo registering
-// import { registerRootComponent } from 'expo';
+import { registerRootComponent } from 'expo';
 
 // safe area for app to run smoothly on all phones
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 // UI imports, ThemeProvider
-import { ThemeProvider, Button } from 'react-native-elements';
+import { ThemeProvider } from 'react-native-elements';
 
 // THEME object for the ThemeProvider
 import { THEME } from './src/config';
@@ -116,15 +116,15 @@ function Full_App(){
 
 // expo uses this registry method instead of registry component
 // when app launches maybe registry component will work
-// registerRootComponent(Full_App);
+registerRootComponent(Full_App);
 
 // for web
-AppRegistry.registerComponent("Peter-First-App", () => Full_App);
+// AppRegistry.registerComponent("Peter-First-App", () => Full_App);
 
 
-if (Platform.OS == "web"){
-    AppRegistry.runApplication("Peter-First-App", {
-        rootTag: document.getElementById('root')
-    });
-};
+// if (Platform.OS == "web"){
+//     AppRegistry.runApplication("Peter-First-App", {
+//         rootTag: document.getElementById('root')
+//     });
+// };
 

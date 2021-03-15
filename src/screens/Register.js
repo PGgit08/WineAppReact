@@ -1,16 +1,26 @@
-import { StatusBar } from "expo-status-bar";
 import React, { useState, useContext } from "react";
+
 import {
   StyleSheet,
-  Text,
   View,
-  TextInput,
-  TouchableOpacity,
-  Button
+  TouchableOpacity
 } from "react-native";
 
 // context
 import { MainContext } from '../contexts/main_context';
+
+// UI react native elements
+import {
+    Input,
+    Text,
+    Button
+} from 'react-native-elements';
+
+import Icon from 'react-native-vector-icons/FontAwesome';
+
+import {
+    Container
+} from '../components/custom';
 
 
 function Register({ navigation }){
@@ -23,89 +33,76 @@ function Register({ navigation }){
 
     // return jsx
     return (
-        <View style={styles.container}>
-        <StatusBar style="auto" />
+        <Container>
+            <View style={styles.header}>
+                <TouchableOpacity onPress={() => navigation.goBack()}>
+                    <Icon 
+                        name='arrow-left'
+                        size={24}
+                        color="black"
+                    />
+                </TouchableOpacity>
+                <Text h1>
+                    Register
+                </Text>
+            </View>
 
-        <View style={styles.inputView}>
-            <TextInput
-                style={styles.TextInput}
-                placeholder="Username."
-                placeholderTextColor="#003f5c"
-                onChangeText={(u) => setUsername(u)}
-            />
-        </View>
-    
-        <View style={styles.inputView}>
-            <TextInput
-                style={styles.TextInput}
-                placeholder="Password."
-                placeholderTextColor="#003f5c"
-                secureTextEntry={true}
-                onChangeText={(p) => setPassword(p)}
-            />
-        </View>
+            <View style={styles.input_container}>
+                <Input
+                    placeholder="Username"
+                    onChangeText={(u) => setUsername(u)}
+                />
+                
+                <Input
+                    placeholder="Password"
+                    onChangeText={(p) => setPassword(p)}
+                />
+                <Input 
+                    placeholder="Email"
+                    onChangeText={(e) => setEmail(e)}
+                />
+            </View>
 
-        <View style={styles.inputView}>
-            <TextInput
-                style={styles.TextInput}
-                placeholder="Email."
-                placeholderTextColor="#003f5c"
-                secureTextEntry={true}
-                onChangeText={(e) => setEmail(e)}
-            />
-        </View>
-        
-        <TouchableOpacity style={styles.loginBtn} onPress={
-            () => Context_Register({username, password, email})
-        }>
-            <Text>REGISTER</Text>
-        </TouchableOpacity>
-    </View>
+            <View style={styles.button_container}>
+                <Button
+                    title="Continue"
+                    onPress={() => Context_Register({username, password, email})}
+                />
+            </View>
+
+        </Container>
     );
-}
+};
 
 // this doesn't really matter it's just stuff
 // to make the screen look pretty
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: "#fff",
-        alignItems: "center",
-        justifyContent: "center"
-    },
-
-    inputView: {
-        backgroundColor: "#FFC0CB",
-        borderRadius: 30,
-        width: "70%",
-        height: 45,
-        marginBottom: 20,
-
-        alignItems: "center"
-    },
-
-    TextInput: {
-        height: 50,
-        flex: 1,
-        padding: 10,
-        marginLeft: 20
-    },
-
-    forgot_button: {
-        height: 30,
-        marginBottom: 30
-    },
-
-    loginBtn: {
-        width: "80%",
-        borderRadius: 25,
-        height: 50,
-        alignItems: "center",
-        justifyContent: "center",
-        backgroundColor: "#FF1493"
+const styles = StyleSheet.create(
+    {
+        header: {
+            flex: 1,
+            marginTop: 80,
+            marginLeft: 'auto',
+            marginRight: 'auto',
+            flexDirection: 'row'
+        },
+        input_container: {
+            flex: 2,
+            marginTop: 80
+        },
+        button_container: {
+            marginLeft: 'auto',
+            marginRight: 'auto',
+            flex: 1,
+            marginTop: 60
+        },
+        register_button: {
+            flex: 1,
+            marginLeft: 'auto',
+            marginRight: 'auto',
+            marginTop: 30
+        }
     }
-});
-
+);
 // export function
 export default Register;
 

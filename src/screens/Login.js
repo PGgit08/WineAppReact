@@ -14,12 +14,13 @@ import {
     Container
 } from '../components/custom';
 
+// pre-made ui
 import {
-    SocialIcon,
     Button,
     Text,
     Input
 } from 'react-native-elements';
+
 
 function Login({ navigation }){
     // create function state
@@ -31,9 +32,11 @@ function Login({ navigation }){
     // return jsx
     return (
         <Container>
-            <Text h1>
-                Login
-            </Text>
+            <View style={styles.header}>
+                <Text h1>
+                    Login
+                </Text>
+            </View>
 
             <View style={styles.input_container}>
                 <Input
@@ -49,7 +52,9 @@ function Login({ navigation }){
 
             <View style={styles.register_button}>
                 <TouchableOpacity onPress={() => navigation.navigate('Register')}>
-                    New? Click Here To Register.
+                    <Text>
+                        New? Click Here To Register.
+                    </Text>
                 </TouchableOpacity>
             </View>
 
@@ -62,10 +67,17 @@ function Login({ navigation }){
 
         </Container>
     );
-}
+};
 
 const styles = StyleSheet.create(
     {
+        header: {
+            flex: 1,
+            marginTop: 80,
+            marginLeft: 'auto',
+            marginRight: 'auto',
+            flexDirection: 'row'
+        },
         input_container: {
             flex: 2,
             marginTop: 80
