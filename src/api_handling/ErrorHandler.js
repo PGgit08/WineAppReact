@@ -19,7 +19,11 @@ export default function API_ErrorHandler(){
             {/* {console.log('error handler re-render')} */}
             {back_end.isError === true ? (
                 <>
-                    {Alert({error, Backend_Refresh})}
+                    <Alert 
+                        visible={true}
+                        Backend_Refresh={Backend_Refresh}
+                        error={back_end.errorMsg}
+                    />
                 </>
             ) : (
                 <>

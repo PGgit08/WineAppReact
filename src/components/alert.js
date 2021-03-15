@@ -1,26 +1,39 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
-    View,
+    Overlay,
     Text,
-    Button,
-    StyleSheet
-} from 'react-native';
+    Button
+} from 'react-native-elements';
 
+import { View } from 'react-native';
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center'
-    }
-});
+import { Modal } from 'react-native-web';
 
 export default function Alert(props){
     // alert that refreshes
     // after button press
+    const [visible, setVisible] = useState(props.visible);
+
+
+    const refresh = () => {
+        props.Backend_Refresh();
+        setVisible(false);
+    };
+
     return (
-        <View style={styles.container}>
-            <Text>{props.error}</Text>
-            <Button onPress={props.Backend_Refresh} title="OK"/>
+        <View>
+            <Overlay
+                onBackdropPress={refresh}
+                isVisible={visible}
+                ModalComponent={Modal}
+            >
+                <Text>{ props.error }</Text>
+                <Button
+                    title="OK"
+                    onPress={refresh}
+                />
+
+            </Overlay>
         </View>
     );
 };

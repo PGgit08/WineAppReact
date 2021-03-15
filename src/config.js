@@ -43,14 +43,22 @@ export const THEME = {
         buttonStyle: {
             backgroundColor: theme_basic.colors.main.red,
             borderRadius: 40,
-            margin: 'auto'
         }
     },
     Text: {
         h1Style: {
-            margin: 'auto',
+            marginLeft: 'auto',
+            marginRight: 'auto',
             color: theme_basic.colors.main.red,
-            fontFamily: theme_basic.fonts.main.title
+            fontFamily: theme_basic.fonts.main.title,
+            flex: 1,
+            marginTop: 80
+        }
+    },
+    Input: {
+        inputContainerStyle: {
+            marginLeft: 'auto',
+            marginRight: 'auto'
         }
     }
 };
