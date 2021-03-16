@@ -73,26 +73,18 @@ const styles = StyleSheet.create(
     {
         header: {
             flex: 1,
-            marginTop: 80,
-            marginLeft: 'auto',
-            marginRight: 'auto',
-            flexDirection: 'row'
+            marginTop: 80
         },
         input_container: {
             flex: 2,
-            marginTop: 80
+            marginTop: 40
         },
         button_container: {
-            marginLeft: 'auto',
-            marginRight: 'auto',
             flex: 1,
             marginTop: 60
         },
         register_button: {
-            flex: 1,
-            marginLeft: 'auto',
-            marginRight: 'auto',
-            marginTop: 30
+            flex: 1
         }
     }
 );

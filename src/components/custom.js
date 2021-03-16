@@ -4,17 +4,13 @@ These are re-usable.
 */
 import React from 'react';
 import {
-    View,
-    StyleSheet
+    StyleSheet,
+    KeyboardAvoidingView
 } from 'react-native';
 
 // theme context
 import {
-    ThemeConsumer,
-    Header,
-    Text,
-    Button,
-    useTheme
+    ThemeConsumer
 } from 'react-native-elements';
 
 export function Container({ children }){
@@ -22,9 +18,9 @@ export function Container({ children }){
         <ThemeConsumer>
             {
                 ({ theme }) => (
-                    <View style={{...styles.container}}>
+                    <KeyboardAvoidingView style={styles.container}>
                         { children }
-                    </View>
+                    </KeyboardAvoidingView>
                 )
             }
         </ThemeConsumer>

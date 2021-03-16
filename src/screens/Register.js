@@ -40,6 +40,7 @@ function Register({ navigation }){
                         name='arrow-left'
                         size={24}
                         color="black"
+                        style={{flex: 1}}
                     />
                 </TouchableOpacity>
                 <Text h1>
@@ -81,25 +82,15 @@ const styles = StyleSheet.create(
         header: {
             flex: 1,
             marginTop: 80,
-            marginLeft: 'auto',
-            marginRight: 'auto',
             flexDirection: 'row'
         },
         input_container: {
             flex: 2,
-            marginTop: 80
-        },
-        button_container: {
-            marginLeft: 'auto',
-            marginRight: 'auto',
-            flex: 1,
             marginTop: 60
         },
-        register_button: {
+        button_container: {
             flex: 1,
-            marginLeft: 'auto',
-            marginRight: 'auto',
-            marginTop: 30
+            marginTop: 60
         }
     }
 );
