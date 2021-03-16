@@ -35,7 +35,7 @@ const HomeStack = createStackNavigator();
 export const HomeFlow = () => {
     // navigation stacks for home (map -> profile)
     const home_navigation = (
-        <HomeStack.Navigator initialRouteName="Profile">
+        <HomeStack.Navigator initialRouteName="Profile" screenOptions={{headerShown: false}}>
             <HomeStack.Screen 
                 component={Profile}
                 name='Profile'

@@ -49,8 +49,11 @@ export const THEME = {
     Text: {
         h1Style: {
             color: theme_basic.colors.main.red,
-            fontFamily: theme_basic.fonts.main.title,
-            flex: 2
+            fontFamily: theme_basic.fonts.main.content
+        },
+        h3Style: {
+            color: theme_basic.colors.main.black,
+            fontFamily: theme_basic.fonts.main.content
         }
     },
     Input: {

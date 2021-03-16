@@ -3,8 +3,8 @@ import React, { useContext, useEffect } from 'react';
 // react native UI
 import {
     View,
-    Button,
-    StyleSheet
+    StyleSheet,
+    TouchableOpacity
 } from 'react-native';
 
 // custom UI + react native elements
@@ -13,7 +13,9 @@ import {
 } from '../components/custom';
 
 import {
-    Text
+    Text,
+    Button,
+    Avatar
 } from 'react-native-elements';
 
 import {
@@ -49,8 +51,37 @@ function Profile({ navigation }){
                 </Text>
             </View>
 
-            <View>
-                {/* CREDENTIAL INFO + PROFILE PIC */}
+            <View style={{marginTop: 10, flex:1}}>
+                <View style={styles.cred_info}>
+                    {/* CREDENTIAL INFO + PROFILE PIC */}
+                    <Avatar 
+                        rounded
+                        title="JD"
+                        size="medium"
+                        avatarStyle={{flex: 1}}
+                        overlayContainerStyle={{backgroundColor:'blue'}}
+                    />
+                    <View style={{marginLeft: 10, marginTop: 5}}>
+                        <Text>Username: { UserProfile.username }</Text>
+                        <Text>Email: { UserProfile.email }</Text>
+                    </View>
+                </View>
+
+                <View style={{marginTop: 15}}>
+                    <Button
+                        title="Edit Profile"
+                        onPress={() => alert("not done yet")}
+                    />
+                </View>
+            </View>
+
+            <View style={styles.logout_button}>
+                {/* LOGOUT BUTTON */}
+                <TouchableOpacity onPress={Context_SignOut}>
+                    <Text h3>
+                        Logout
+                    </Text>
+                </TouchableOpacity>
             </View>
         </Container>
     );
@@ -60,8 +91,24 @@ function Profile({ navigation }){
 const styles = StyleSheet.create(
     {
         header: {
-            flex: 1,
+            paddingTop: 15,
+            paddingBottom: 15,
+            width: '100%',
+            textAlign: 'center',
             backgroundColor: theme_basic.colors.main.red
+        },
+        cred_info: {
+            flexDirection: 'row'
+        },
+        logout_button: {
+            paddingTop: 5,
+            paddingBottom: 5,
+            width: '100%',
+            textAlign: 'center',
+            backgroundColor: theme_basic.colors.main.red
+        },
+        edit_button: {
+            flex: 1
         }
     }
 );

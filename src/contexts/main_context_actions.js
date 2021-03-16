@@ -106,6 +106,7 @@ const checkJWT = dispatch => {
                 type: 'sign_in',
                 val: val
             });
+            
         }).catch((err) => {
             console.log(err);
         });
