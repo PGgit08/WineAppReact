@@ -20,7 +20,7 @@ export const POST_ENDPOINTS = {
 };
 
 // basic things for theme
-const theme_basic = {
+export const theme_basic = {
     colors: {
         main: {
             red: "#DE3232",

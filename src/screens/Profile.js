@@ -1,20 +1,28 @@
 import React, { useContext, useEffect } from 'react';
 
+// react native UI
 import {
     View,
-    Text,
     Button,
-    StyleSheet,
-    ScrollView,
-    Image
+    StyleSheet
 } from 'react-native';
+
+// custom UI + react native elements
+import {
+    Container
+} from '../components/custom';
+
+import {
+    Text
+} from 'react-native-elements';
+
+import {
+    theme_basic
+} from '../config';
 
 // context
 import { MainContext } from '../contexts/main_context';
 
-// post component + refresh component
-import Post from '../components/post';
-import Refresh from '../components/refresh';
 
 function Profile({ navigation }){
     // get context info
@@ -33,54 +41,29 @@ function Profile({ navigation }){
     }, []);
 
     return(
-        <View style={styles.container}>
+        <Container>
             <View style={styles.header}>
-                
-                <Text style={styles.profile_text}>Profile</Text>
-                <Image
-                    source={require('../static/wineappglass.jpg')}
-                    style={styles.profile_image}
-                />
-                
-                <View style={{flex: 1}}>
-                    <Text style={styles.cred_text}> Username: { UserProfile.username } </Text>
-                    <Text style={styles.cred_text}> Email: { UserProfile.email }</Text>
-                    <Button onPress={Context_SignOut} title="Sign Out"/>
-                </View>
-            
+                {/* HEADER */}
+                <Text h1 h1Style={{color: theme_basic.colors.main.black}}>
+                    Profile
+                </Text>
             </View>
-        </View>
+
+            <View>
+                {/* CREDENTIAL INFO + PROFILE PIC */}
+            </View>
+        </Container>
     );
 };
 
 // styles
-const styles = StyleSheet.create({
-    container: {
-        flex: 6,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: 'blue'
-    },
-    header: {
-        justifyContent: 'center',
-        alignItems: 'center',
-        flex: 1
-    },
-    profile_text: {
-        flex: 0.2,
-        fontSize: 50
-    },
-    profile_image: {
-        width: 80,
-        height: 80,
-        borderRadius: 200 / 2,
-        marginBottom: 15
-    },
-    cred_text: {
-        fontSize: 20,
-        backgroundColor: 'red',
-        alignContent: 'center'
+const styles = StyleSheet.create(
+    {
+        header: {
+            flex: 1,
+            backgroundColor: theme_basic.colors.main.red
+        }
     }
-});
+);
 
 export default Profile;

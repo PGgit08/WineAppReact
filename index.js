@@ -62,7 +62,7 @@ function App(){
     // return container, checking whether jwt exists or not
     return(
         <NavigationContainer>
-            {/* {console.log('app re-render')} */}
+            {/* ADD STATUS BAR HERE */}
             <AppStack.Navigator>
                 {context.state.jwt === null || context.state.jwt === undefined? (
                     <>
@@ -116,15 +116,15 @@ function Full_App(){
 
 // expo uses this registry method instead of registry component
 // when app launches maybe registry component will work
-registerRootComponent(Full_App);
+// registerRootComponent(Full_App);
 
 // for web
-// AppRegistry.registerComponent("Peter-First-App", () => Full_App);
+AppRegistry.registerComponent("Peter-First-App", () => Full_App);
 
 
-// if (Platform.OS == "web"){
-//     AppRegistry.runApplication("Peter-First-App", {
-//         rootTag: document.getElementById('root')
-//     });
-// };
+if (Platform.OS == "web"){
+    AppRegistry.runApplication("Peter-First-App", {
+        rootTag: document.getElementById('root')
+    });
+};
 
