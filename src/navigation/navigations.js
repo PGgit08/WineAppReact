@@ -19,16 +19,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 // for profile navigation (posts, liked, saved, etc.)
-const ProfileTabs = createBottomTabNavigator();
-export const ProfileTab = () => {
-    const profile_tabs = (
-        <ProfileTabs.Navigator>
-            {/* Here Posts, Liked, Saved, etc are made */}
-            
-        </ProfileTabs.Navigator>
-    );
-    return profile_tabs;
-};
+export const ProfileTabs = createBottomTabNavigator();
 
 // for stack navigator
 const HomeStack = createStackNavigator();

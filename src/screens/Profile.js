@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 
 // react native UI
 import {
@@ -9,13 +9,10 @@ import {
 
 // custom UI + react native elements
 import {
-    Container
-} from '../components/custom';
-
-import {
     Text,
     Button,
-    Avatar
+    Avatar,
+    ButtonGroup
 } from 'react-native-elements';
 
 import {
@@ -24,6 +21,11 @@ import {
 
 // context
 import { MainContext } from '../contexts/main_context';
+
+// profile page switch tab navigator
+import {
+    ProfileTabs
+} from '../navigation/navigations';
 
 
 function Profile({ navigation }){
@@ -38,12 +40,26 @@ function Profile({ navigation }){
     const Context_SignOut = actions.Context_SignOut;
     const ReloadUser = actions.IdentifyUser;
 
+    // posts or saved button indexes 
+    const button_index = {
+        0: () => {},
+        1: () => {}
+    };
+
+    // button componenets
+    const POSTS_BUTTON = () => (<Text h3>Posts</Text>);
+    const SAVED_BUTTON = () => (<Text h3>Saved</Text>);
+
+    const tab_buttons = [{ element: POSTS_BUTTON }, { element: SAVED_BUTTON }];
+
+    const [currentButtonIndex, setButtonIndex] = useState(0);
+
     useEffect(() => {
         ReloadUser(context_state.jwt);
     }, []);
 
     return(
-        <Container>
+        <View style={styles.container}>
             <View style={styles.header}>
                 {/* HEADER */}
                 <Text h1 h1Style={{color: theme_basic.colors.main.black}}>
@@ -51,7 +67,7 @@ function Profile({ navigation }){
                 </Text>
             </View>
 
-            <View style={{marginTop: 10, flex:1}}>
+            <View style={{marginTop: 10}}>
                 <View style={styles.cred_info}>
                     {/* CREDENTIAL INFO + PROFILE PIC */}
                     <Avatar 
@@ -61,7 +77,7 @@ function Profile({ navigation }){
                         avatarStyle={{flex: 1}}
                         overlayContainerStyle={{backgroundColor:'blue'}}
                     />
-                    <View style={{marginLeft: 10, marginTop: 5}}>
+                    <View style={{marginLeft: 10, marginTop: 5, flex:2}}>
                         <Text>Username: { UserProfile.username }</Text>
                         <Text>Email: { UserProfile.email }</Text>
                     </View>
@@ -75,6 +91,22 @@ function Profile({ navigation }){
                 </View>
             </View>
 
+            <View style={{flex: 1, marginTop: 10, backgroundColor:'green', width:'100%'}}>
+                <Text>Info Scroll View(Posts/Saved)</Text>
+
+                <ButtonGroup 
+                        onPress={(selectedIndex) => {button_index[selectedIndex](); setButtonIndex(selectedIndex);}}
+                        selectedIndex={currentButtonIndex}
+                        buttons={tab_buttons}
+                />
+                
+                <ProfileTabs.Navigator screenOptions={{tabBarVisible: false}}>
+
+                </ProfileTabs.Navigator>
+            </View>
+
+
+
             <View style={styles.logout_button}>
                 {/* LOGOUT BUTTON */}
                 <TouchableOpacity onPress={Context_SignOut}>
@@ -83,13 +115,18 @@ function Profile({ navigation }){
                     </Text>
                 </TouchableOpacity>
             </View>
-        </Container>
+        </View>
     );
 };
 
 // styles
 const styles = StyleSheet.create(
     {
+        container: {
+            flex: 1,
+            alignItems: 'center',
+            justifyContent: 'space-between'
+        },
         header: {
             paddingTop: 15,
             paddingBottom: 15,
@@ -106,9 +143,6 @@ const styles = StyleSheet.create(
             width: '100%',
             textAlign: 'center',
             backgroundColor: theme_basic.colors.main.red
-        },
-        edit_button: {
-            flex: 1
         }
     }
 );
