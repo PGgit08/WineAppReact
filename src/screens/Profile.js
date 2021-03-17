@@ -19,13 +19,10 @@ import {
     theme_basic
 } from '../config';
 
+import Post from '../components/post';
+
 // context
 import { MainContext } from '../contexts/main_context';
-
-// profile page switch tab navigator
-import {
-    ProfileTabs
-} from '../navigation/navigations';
 
 
 function Profile({ navigation }){
@@ -38,13 +35,7 @@ function Profile({ navigation }){
 
     // actions
     const Context_SignOut = actions.Context_SignOut;
-    const ReloadUser = actions.IdentifyUser;
-
-    // posts or saved button indexes 
-    const button_index = {
-        0: () => {},
-        1: () => {}
-    };
+    const ReloadUser = async () => await actions.IdentifyUser(context_state.jwt);
 
     // button componenets
     const POSTS_BUTTON = () => (<Text h3>Posts</Text>);
@@ -54,8 +45,21 @@ function Profile({ navigation }){
 
     const [currentButtonIndex, setButtonIndex] = useState(0);
 
+    const ToggleInfo = () => {
+        switch (currentButtonIndex){
+            case 0: return (
+                // posts here
+                <>{ UserProfile.posts.map((p, i) => <Post id={p.id} post={p}/>) }</>
+            )
+            case 1: return (
+                // saved here
+                <Text h3>Nothing Here Yet.</Text>
+            );
+        };
+    };
+
     useEffect(() => {
-        ReloadUser(context_state.jwt);
+        ReloadUser();
     }, []);
 
     return(
@@ -91,18 +95,14 @@ function Profile({ navigation }){
                 </View>
             </View>
 
-            <View style={{flex: 1, marginTop: 10, backgroundColor:'green', width:'100%'}}>
-                <Text>Info Scroll View(Posts/Saved)</Text>
-
+            <View style={{flex: 1, marginTop: 10, width:'100%'}}>
                 <ButtonGroup 
-                        onPress={(selectedIndex) => {button_index[selectedIndex](); setButtonIndex(selectedIndex);}}
+                        onPress={(selectedIndex) => {setButtonIndex(selectedIndex); ReloadUser();}}
                         selectedIndex={currentButtonIndex}
                         buttons={tab_buttons}
                 />
                 
-                <ProfileTabs.Navigator screenOptions={{tabBarVisible: false}}>
-
-                </ProfileTabs.Navigator>
+                <ToggleInfo/>
             </View>
 
 
