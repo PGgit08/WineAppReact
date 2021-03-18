@@ -35,7 +35,11 @@ function Profile({ navigation }){
 
     // actions
     const Context_SignOut = actions.Context_SignOut;
-    const ReloadUser = async () => await actions.IdentifyUser(context_state.jwt);
+    const ReloadUser = async () => {
+        setLoading(true);
+        await actions.IdentifyUser(context_state.jwt);
+        setLoading(false);
+    };
 
     // button componenets
     const POSTS_BUTTON = () => (<Text h3>Posts</Text>);
@@ -45,11 +49,21 @@ function Profile({ navigation }){
 
     const [currentButtonIndex, setButtonIndex] = useState(0);
 
+    // loading state
+    const [loading, setLoading] = useState(false);
+
     const ToggleInfo = () => {
         switch (currentButtonIndex){
             case 0: return (
                 // posts here
-                <>{ UserProfile.posts.map((p, i) => <Post id={p.id} post={p}/>) }</>
+                <>
+                { UserProfile.posts.map((p, i) => {
+                    // p = post, i = index
+                    return (
+                        <Post key={p.id} post={p}></Post>
+                    );
+                }) }
+                </>
             )
             case 1: return (
                 // saved here
@@ -61,6 +75,12 @@ function Profile({ navigation }){
     useEffect(() => {
         ReloadUser();
     }, []);
+
+    if(loading){
+        return(
+            <Text h1>LOADING</Text>
+        );
+    };
 
     return(
         <View style={styles.container}>
