@@ -10,7 +10,7 @@ import Login from '../screens/Login';
 import Register from '../screens/Register';
 
 // screen imports home
-import map from '../screens/Map';
+import FullMap from '../screens/Map';
 import Profile from '../screens/Profile';
 
 
@@ -26,10 +26,15 @@ const HomeStack = createStackNavigator();
 export const HomeFlow = () => {
     // navigation stacks for home (map -> profile)
     const home_navigation = (
-        <HomeStack.Navigator initialRouteName="Profile" screenOptions={{headerShown: false}}>
+        <HomeStack.Navigator initialRouteName="Map" screenOptions={{headerShown: false}}>
             <HomeStack.Screen 
                 component={Profile}
                 name='Profile'
+            />
+
+            <HomeStack.Screen
+                component={FullMap}
+                name='Map'
             />
         </HomeStack.Navigator>
     );

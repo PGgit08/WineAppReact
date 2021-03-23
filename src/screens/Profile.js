@@ -4,7 +4,8 @@ import React, { useContext, useEffect, useState } from 'react';
 import {
     View,
     StyleSheet,
-    TouchableOpacity
+    TouchableOpacity,
+    ScrollView
 } from 'react-native';
 
 // custom UI + react native elements
@@ -57,12 +58,14 @@ function Profile({ navigation }){
             case 0: return (
                 // posts here
                 <>
-                { UserProfile.posts.map((p, i) => {
-                    // p = post, i = index
-                    return (
-                        <Post key={p.id} post={p}></Post>
-                    );
-                }) }
+                <ScrollView>
+                    { UserProfile.posts.map((p, i) => {
+                        // p = post, i = index
+                        return (
+                            <Post redirect={() => {navigation.navigate('Map')}} key={p.id} post={p}></Post>
+                        );
+                    }) }
+                </ScrollView>
                 </>
             )
             case 1: return (
@@ -121,10 +124,8 @@ function Profile({ navigation }){
                         selectedIndex={currentButtonIndex}
                         buttons={tab_buttons}
                 />
-                
                 <ToggleInfo/>
             </View>
-
 
 
             <View style={styles.logout_button}>
@@ -162,7 +163,8 @@ const styles = StyleSheet.create(
             paddingBottom: 5,
             width: '100%',
             textAlign: 'center',
-            backgroundColor: theme_basic.colors.main.red
+            backgroundColor: theme_basic.colors.main.red,
+            position: 'relative'
         }
     }
 );

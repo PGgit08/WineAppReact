@@ -11,6 +11,19 @@ import { default as AUTH_API } from '../api_handling/auth_requests';
 import { default as POST_API } from '../api_handling/post_requests';
 
 
+const mock = [
+    {owner: "1", time:"4:17", body:"hello there this is a mock", id:"1"},
+    {owner: "1", time:"4:17", body:"hello there this is a mock", id:"2"},
+    {owner: "1", time:"4:17", body:"hello there this is a mock", id:"3"},
+    {owner: "1", time:"4:17", body:"hello there this is a mock", id:"4"},
+    {owner: "1", time:"4:17", body:"hello there this is a mock", id:"5"},
+    {owner: "1", time:"4:17", body:"hello there this is a mock", id:"6"},
+    {owner: "1", time:"4:17", body:"hello there this is a mock", id:"7"},
+    {owner: "1", time:"4:17", body:"hello there this is a mock", id:"8"},
+    {owner: "1", time:"4:17", body:"hello there this is a mock", id:"9"},
+    {owner: "1", time:"4:17", body:"hello there this is a mock", id:"10"}
+];
+
 // update server when error
 const MakeError = dispatch => {
     return (err_obj) => {

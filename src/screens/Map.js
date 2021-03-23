@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 // context import
 import { MainContext } from '../contexts/main_context';
 
+import { View, Button, Text } from 'react-native';
 // map import
 // import MapView from "react-native-maps";
 
@@ -14,47 +15,99 @@ class Map extends Component{
         super(props);
         this.setStoreId = this.props.context.actions.setStoreId;
         this.state = {
-            context_state: this.props.context.state,
+            storeId: this.props.context.state.store_id,
+            wineapp_api: {
+                current_stores: {}
+            },
             search_query: "",
             geography: {
                 map: {
-                    center: {},
-                    zoom_level: 0
+                    location: {
+                        latitude: 0,
+                        longitude: 0,
+                        latitudeDelta: 0.1,
+                        longitudeDelta: 0.1
+                    }
                 },
                 user: {
                     user_loc: {}
-                },
-                wineapp_api: {
-                    near_me: {},
-                    lookup: {}
-                } 
+                }
             }
         };
     };
 
+    componentDidMount(){
+        // set user loc?
+        this.getUserLoc().then(
+            () => {this.setMapLoc(this.state.geography.user.user_loc)}
+        );
+    };
+
+    setMapLoc(new_loc){
+        // just set map state
+        console.log(this.state);
+        this.setState(
+            {
+                ...this.state,
+                geography: {
+                    ...this.state.geography,
+                    map: {
+                        location: new_loc
+                    }
+                }
+            }
+        );
+    };
+
     getUserLoc = async () => {
-        // to get user location
-        // and return as a promise
+        // get user location
+        // set geography state
+        navigator.geolocation.getCurrentPosition(
+            async (position) => {
+                console.log(position.coords);
+                await this.setState(
+                    {
+                        ...this.state,
+                        geography: {
+                            ...this.state.geography,
+                            user: {
+                                user_loc: {
+                                    latitude: position.coords.latitude,
+                                    longitude: position.coords.longitude
+                                }
+                            }
+                        }
+                    }
+                );
+                console.log(this.state);
+            }
+        );
     };
 
-    search_NearMe = async () => {
-        // search near the person
+    search_NearMe = () => {
+        // call API, set current_stores
+        // state
     };
 
-    search_ByLookup = async () => {
-        // search for a place
-        // by a lookup string
+    search_ByLookup = () => {
+        // call API, set current_stores
+        // state
     };
 
     render(){
         return (
-            console.log('hi')
+            <View style={{flex:1}}>
+                <Text>
+                    React Native Maps not working on web.
+                    Here is alternative system.
+                </Text>
+            </View>
         );
     };
 };
 
 
-function map({ navigation }){
+function FullMap({ navigation }){
     return (
         <MainContext.Consumer>
             {context => (
@@ -64,4 +117,4 @@ function map({ navigation }){
     );
 };
 
-export default map;
+export default FullMap;
