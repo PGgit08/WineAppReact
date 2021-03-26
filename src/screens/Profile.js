@@ -53,6 +53,12 @@ function Profile({ navigation }){
     // loading state
     const [loading, setLoading] = useState(false);
 
+    // redirecting function
+    const post_redirect = (store_id) => {
+        actions.setStoreId(store_id);
+        navigation.navigate('Map');
+    };
+
     const ToggleInfo = () => {
         switch (currentButtonIndex){
             case 0: return (
@@ -62,7 +68,7 @@ function Profile({ navigation }){
                     { UserProfile.posts.map((p, i) => {
                         // p = post, i = index
                         return (
-                            <Post redirect={() => {navigation.navigate('Map')}} key={p.id} post={p}></Post>
+                            <Post redirect={post_redirect} key={p.id} post={p} />
                         );
                     }) }
                 </ScrollView>

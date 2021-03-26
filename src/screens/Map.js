@@ -5,7 +5,7 @@ import { MainContext } from '../contexts/main_context';
 
 import { View, Button, Text } from 'react-native';
 // map import
-import MapView from "react-native-maps";
+// import MapView from "react-native-maps";
 
 // since this will require
 // lots of functions
@@ -39,27 +39,11 @@ class Map extends Component{
     };
 
     componentDidMount(){
-        // each time component is mounted
-        // get user's location
-        // IS A MUST
-        // this.getUserLoc().then(
-        //     (coords) => {
-        //         // after getting user's location
-        //         // set state of the user's location
-        //         this.setState({
-        //             user_loc: {
-        //                 latitude: coords.latitude,
-        //                 longitude: coords.longitude
-        //             }
-        //         });
-        //         console.log(this.state);
-        //     }
-        // );
+        // don't know
     };
 
     componentWillUnmount(){
-        // unsubscribe the watching navigation
-        // navigator.geolocation.clearWatch(this.watch_id);
+        // don't know
     }
 
     getUserLoc = () => {
@@ -93,11 +77,7 @@ class Map extends Component{
                 <Text>
                     Map Info(location): { this.state.map_loc.latitude }, { this.state.map_loc.longitude }
                 </Text>
-                <MapView 
-                    style={{flex:1}}
-                    showUserLocation={true}
-                    followsUserLocation={true}
-                />
+
             </View>
         );
     };

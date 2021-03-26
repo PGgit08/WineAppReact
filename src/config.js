@@ -5,6 +5,7 @@ const api_base = 'https://wineapp-api.herokuapp.com';
 
 const auth_base = api_base + '/users';
 const posts_base = api_base + '/posts';
+const store_base = api_base + '/stores';
 
 // endpoint objects
 
@@ -17,6 +18,10 @@ export const AUTH_ENDPOINTS = {
 export const POST_ENDPOINTS = {
     get: posts_base + '/get',
     add: posts_base + '/add'
+};
+
+export const STORE_ENDPOINTS = {
+    get: store_base + '/get_by_id'
 };
 
 // basic things for theme

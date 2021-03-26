@@ -17,7 +17,7 @@ function Post(props){
 
     return (
         <View style={{marginLeft: 10, marginRight: 10, marginBottom:20}}>
-            <ListItem key={post.id} onLongPress={redirect}>
+            <ListItem key={post.id} onLongPress={() => {redirect(post.my_store)}}>
                 <ListItem.Content>
                     <ListItem.Title>
                         On Store: { post.my_store }

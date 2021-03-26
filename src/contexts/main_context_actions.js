@@ -9,9 +9,9 @@ import {
 // api request imports
 import { default as AUTH_API } from '../api_handling/auth_requests';
 import { default as POST_API } from '../api_handling/post_requests';
+import { default as STORE_API } from '../api_handling/store_requests';
 
-
-const mock = [
+/* const mock = [
     {owner: "1", time:"4:17", body:"hello there this is a mock", id:"1"},
     {owner: "1", time:"4:17", body:"hello there this is a mock", id:"2"},
     {owner: "1", time:"4:17", body:"hello there this is a mock", id:"3"},
@@ -22,7 +22,7 @@ const mock = [
     {owner: "1", time:"4:17", body:"hello there this is a mock", id:"8"},
     {owner: "1", time:"4:17", body:"hello there this is a mock", id:"9"},
     {owner: "1", time:"4:17", body:"hello there this is a mock", id:"10"}
-];
+]; */
 
 // update server when error
 const MakeError = dispatch => {
@@ -57,6 +57,18 @@ const IdentifyUser = dispatch => {
         }
         catch(err){
             // make server error
+            MakeError(dispatch)(err);
+        };
+    };
+};
+
+const GetStoreInfo = dispatch => {
+    return async (store_id) => {
+        try{
+            const store_info = (await STORE_API.get_store(store_id)).data;
+            return store_info.store;
+        }
+        catch(err){
             MakeError(dispatch)(err);
         };
     };
@@ -165,5 +177,6 @@ export default {
     checkJWT,
     setStoreId,
     Backend_Refresh,
-    Backend_Update
+    Backend_Update,
+    GetStoreInfo
 };
