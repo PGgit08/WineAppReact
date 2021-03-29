@@ -38,7 +38,6 @@ export const CheckResponse = (res) => {
         if(res.data.error == 1){
             reject(
                 {
-                    isError: true,
                     errorMsg: res.data.mes
                 }
             );
@@ -47,7 +46,7 @@ export const CheckResponse = (res) => {
             // there will be no error
             // in some cases, like login
             // which just returns JWT
-            resolve(res);
+            resolve(res.data);
         };
     });
 };

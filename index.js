@@ -10,7 +10,7 @@ import { HomeFlow, AuthFlow } from './src/navigation/navigations';
 
 // context imports(+ theme context)
 import { MainContext, MainProvider } from './src/contexts/main_context';
-// import { ThemeProvider } from './src/contexts/theme_context';
+import { ApiContext, ApiProvider } from './src/contexts/api_context';
 
 // gui just for tests
 import {
@@ -105,10 +105,12 @@ function Full_App(){
     return (
         <SafeAreaProvider>
             <ThemeProvider theme={THEME}>
-                <MainProvider>
-                    <API_ErrorHandler/>
-                    <App />
-                </MainProvider>
+                <ApiProvider>
+                    <MainProvider>
+                        <API_ErrorHandler/>
+                        <App />
+                    </MainProvider>
+                </ApiProvider>
             </ThemeProvider>
         </SafeAreaProvider>
     );
@@ -117,15 +119,15 @@ function Full_App(){
 
 // expo uses this registry method instead of registry component
 // when app launches maybe registry component will work
-registerRootComponent(Full_App);
+// registerRootComponent(Full_App);
 
 // for web
-// AppRegistry.registerComponent("Peter-First-App", () => Full_App);
+AppRegistry.registerComponent("Peter-First-App", () => Full_App);
 
 
-// if (Platform.OS == "web"){
-//     AppRegistry.runApplication("Peter-First-App", {
-//         rootTag: document.getElementById('root')
-//     });
-// };
+if (Platform.OS == "web"){
+    AppRegistry.runApplication("Peter-First-App", {
+        rootTag: document.getElementById('root')
+    });
+};
 

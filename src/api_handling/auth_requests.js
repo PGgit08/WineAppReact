@@ -56,7 +56,7 @@ const identify_user = async (jwt) => {
 };
 
 
-export default{
+export {
     login, 
     register,
     identify_user

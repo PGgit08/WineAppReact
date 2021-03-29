@@ -24,7 +24,7 @@ const reducer = (state, action) => {
     switch (action.type){
         case 'sign_in': return {
             ...state,
-            jwt: action.val,
+            jwt: action.val.jwt,
             storage_loading: false
         };
         case 'sign_out': return {

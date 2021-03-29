@@ -5,8 +5,9 @@ import {
   TouchableOpacity
 } from "react-native";
 
-// context
+// contexts
 import { MainContext } from '../contexts/main_context';
+import { ApiContext } from "../contexts/api_context";
 
 // UI, custom componenets
 import {
@@ -21,12 +22,24 @@ import {
 } from 'react-native-elements';
 
 
+// API
+import { login } from '../api_handling/auth_requests';
+
 function Login({ navigation }){
     // create function state
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
     const { Context_SignIn } = useContext(MainContext).actions;
+    const { makeError } = useContext(ApiContext)
+
+    const ApiSignIn = () => {
+        login({username, password}).then(
+            (res) => {Context_SignIn(res)}
+        ).catch(
+            makeError
+        );
+    }
 
     // return jsx
     return (
