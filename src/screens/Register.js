@@ -6,8 +6,10 @@ import {
   TouchableOpacity
 } from "react-native";
 
-// context
+// contexts
 import { MainContext } from '../contexts/main_context';
+import { ApiContext } from '../contexts/api_context';
+
 
 // UI react native elements
 import {
@@ -22,6 +24,8 @@ import {
     Container
 } from '../components/custom';
 
+// API
+import { API_REGISTER } from '../api_handling/auth_requests';
 
 function Register({ navigation }){
     // create function state
@@ -30,6 +34,12 @@ function Register({ navigation }){
     const [email, setEmail] = useState('');
 
     const { Context_Register } = useContext(MainContext).actions;
+
+    const { makeError } = useContext(ApiContext);
+
+    const sign_up = () => {
+        API_REGISTER();
+    };
 
     // return jsx
     return (

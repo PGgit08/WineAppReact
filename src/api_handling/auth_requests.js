@@ -9,7 +9,7 @@ import { AUTH_ENDPOINTS } from '../config';
 // response checker(returns promise)
 import { CheckResponse } from './ErrorHandler';
 
-const login = async ({username, password}) => {
+const API_LOGIN = async ({username, password}) => {
     // promise for api
     // catch use ErrorHandler
     try{
@@ -24,7 +24,7 @@ const login = async ({username, password}) => {
 
 };
 
-const register = async ({username, password, email}) => {
+const API_REGISTER= async ({username, password, email}) => {
     try{
         let res = await axios.get(AUTH_ENDPOINTS.register, {
             params: {
@@ -41,7 +41,7 @@ const register = async ({username, password, email}) => {
 
 };
 
-const identify_user = async (jwt) => {
+const API_IDENTIFY_USER = async (jwt) => {
     try{
         let res = await axios.get(AUTH_ENDPOINTS.identify, {
             headers: {
@@ -57,7 +57,7 @@ const identify_user = async (jwt) => {
 
 
 export {
-    login, 
-    register,
-    identify_user
+    API_LOGIN,
+    API_REGISTER,
+    API_IDENTIFY_USER
 };

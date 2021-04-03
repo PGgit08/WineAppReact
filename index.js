@@ -10,7 +10,7 @@ import { HomeFlow, AuthFlow } from './src/navigation/navigations';
 
 // context imports(+ theme context)
 import { MainContext, MainProvider } from './src/contexts/main_context';
-import { ApiContext, ApiProvider } from './src/contexts/api_context';
+import { ApiProvider } from './src/contexts/api_context';
 
 // gui just for tests
 import {

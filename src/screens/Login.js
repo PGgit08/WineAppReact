@@ -23,7 +23,7 @@ import {
 
 
 // API
-import { login } from '../api_handling/auth_requests';
+import { API_LOGIN } from '../api_handling/auth_requests';
 
 function Login({ navigation }){
     // create function state
@@ -31,10 +31,10 @@ function Login({ navigation }){
     const [password, setPassword] = useState('');
 
     const { Context_SignIn } = useContext(MainContext).actions;
-    const { makeError } = useContext(ApiContext)
+    const { makeError } = useContext(ApiContext);
 
-    const ApiSignIn = () => {
-        login({username, password}).then(
+    const sign_in = () => {
+        API_LOGIN({username, password}).then(
             (res) => {Context_SignIn(res)}
         ).catch(
             makeError
@@ -73,7 +73,7 @@ function Login({ navigation }){
             <View style={styles.button_container}>
                 <Button
                     title="Continue"
-                    onPress={() => Context_SignIn({username, password})}
+                    onPress={sign_in}
                 />
             </View>
 
